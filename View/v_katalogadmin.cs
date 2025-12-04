@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using TaniGrow2.Controller;
+﻿using TaniGrow2.Controller;
 using TaniGrow2.Model;
 
 namespace TaniGrow2.View
@@ -224,11 +215,7 @@ namespace TaniGrow2.View
             this.Close();
         }
 
-        //private void btnfeedbackadmin_Click(object sender, EventArgs e)
-        //{
-        //    new v_feedbackadmin().Show();
-        //    this.Close();
-        //}
+
 
         private void btnprofiladmin_Click(object sender, EventArgs e)
         {
@@ -248,21 +235,12 @@ namespace TaniGrow2.View
             }
         }
 
-        private void v_katalogadmin_Load(object sender, EventArgs e)
-        {
-            btnstok.BringToFront();
-        }
 
         private void btnstok_Click(object sender, EventArgs e)
         {
             new v_stok().Show();
             this.Hide();
         }
-
-        //private void supplier_Click(object sender, EventArgs e)
-        //{
-        //    new v_supplier().Show();
-        //    this.Close();
-        //}
     }
 }
+

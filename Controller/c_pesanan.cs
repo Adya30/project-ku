@@ -1,9 +1,4 @@
 ﻿using Npgsql;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TaniGrow2.dbconnect;
 using TaniGrow2.Model;
 
@@ -258,8 +253,51 @@ namespace TaniGrow2.Controller
                 return false;
             }
         }
+        public List<m_stokMasuk> GetRiwayatStokMasuk()
+        {
+            List<m_stokMasuk> list = new List<m_stokMasuk>();
 
 
+            using var conn = db.getConn();
+            conn.Open();
 
+            string query = @"
+        SELECT s.id_stok_masuk, s.jumlah, s.tanggal_masuk,
+               p.id_produk, p.nama_produk,
+               u.id_user, u.nama_lengkap
+        FROM stok_masuk s
+        LEFT JOIN produk p ON p.id_produk = s.id_produk
+        LEFT JOIN users u ON u.id_user = s.id_user
+        ORDER BY s.tanggal_masuk DESC";
+
+            using var cmd = new NpgsqlCommand(query, conn);
+            using var reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                list.Add(new m_stokMasuk
+                {
+                    IdStokMasuk = reader.GetInt32(0),
+                    Jumlah = reader.GetInt32(1),
+                    TanggalMasuk = reader.GetDateTime(2),
+
+                    Produk = new m_produk
+                    {
+                        IdProduk = reader.GetInt32(3),
+                        NamaProduk = reader.GetString(4)
+                    },
+
+                    User = new User
+                    {
+                        IdUser = reader.IsDBNull(5) ? 0 : reader.GetInt32(5),
+                        NamaLengkap = reader.IsDBNull(6) ? "-" : reader.GetString(6)
+                    }
+                });
+            }
+            MessageBox.Show("Jumlah stok: " + list.Count);
+            return list;
+
+
+        }
     }
 }

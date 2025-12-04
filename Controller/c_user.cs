@@ -1,12 +1,5 @@
-﻿using Microsoft.VisualBasic.ApplicationServices;
-using Npgsql;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Npgsql;
 using TaniGrow2.dbconnect;
-using TaniGrow2.Model;
 
 namespace TaniGrow2.Controller
 {

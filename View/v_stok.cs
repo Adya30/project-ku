@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using TaniGrow2.Controller;
+﻿using TaniGrow2.Controller;
 using TaniGrow2.Model;
 
 namespace TaniGrow2.View
@@ -172,126 +163,106 @@ namespace TaniGrow2.View
             }
 
             int top = 10;
+
             foreach (var item in keranjang.ToArray())
             {
                 Panel row = new Panel
                 {
-                    Width = panel1.Width - 25,
+                    Width = panel1.Width - 20,
                     Height = 40,
                     Left = 5,
                     Top = top
                 };
 
+                // Nama Produk
                 Label lblNama = new Label
                 {
                     Text = item.produk.NamaProduk,
                     Left = 5,
                     Top = 10,
-                    Width = 220,
+                    Width = 200,
                     Font = new Font("Arial", 9)
                 };
                 row.Controls.Add(lblNama);
 
-                Button btnMin = new Button
-                {
-                    Text = "-",
-                    Width = 30,
-                    Height = 30,
-                    Left = 230,
-                    Top = 5,
-                    Font = new Font("Arial", 9)
-                };
-                btnMin.Click += (s, e) => { KurangiQty(item.produk); };
-                row.Controls.Add(btnMin);
-
-                Label lblJumlah = new Label
+                // TextBox jumlah
+                TextBox txtJumlah = new TextBox
                 {
                     Text = item.jumlah.ToString(),
-                    Left = 265,
-                    Top = 10,
-                    Width = 30,
-                    Font = new Font("Arial", 9),
-                    TextAlign = ContentAlignment.MiddleCenter
+                    Left = 220,
+                    Top = 8,
+                    Width = 50,
+                    TextAlign = HorizontalAlignment.Center
                 };
-                row.Controls.Add(lblJumlah);
 
-                Button btnPlus = new Button
+                // Update jumlah saat berubah
+                txtJumlah.TextChanged += (s, e) =>
                 {
-                    Text = "+",
-                    Width = 30,
-                    Height = 30,
-                    Left = 300,
-                    Top = 5,
-                    Font = new Font("Arial", 9)
+                    if (int.TryParse(txtJumlah.Text, out int newQty))
+                    {
+                        if (newQty <= 0)
+                        {
+                            keranjang.Remove(item);
+                        }
+                        else
+                        {
+                            var idx = keranjang.FindIndex(x => x.produk.IdProduk == item.produk.IdProduk);
+                            keranjang[idx] = (item.produk, newQty);
+                        }
+                    }
                 };
-                btnPlus.Click += (s, e) => { TambahQty(item.produk); };
-                row.Controls.Add(btnPlus);
+                row.Controls.Add(txtJumlah);
+
+                // Tombol hapus
+                Button btnHapus = new Button
+                {
+                    Text = "X",
+                    Width = 35,
+                    Height = 25,
+                    Left = 280,
+                    Top = 7,
+                    BackColor = Color.IndianRed,
+                    ForeColor = Color.White
+                };
+
+                btnHapus.Click += (s, e) =>
+                {
+                    keranjang.Remove(item);
+                    UpdateRingkasan();
+                };
+
+                row.Controls.Add(btnHapus);
 
                 panel1.Controls.Add(row);
                 top += 45;
-
-                Button btnBatal = new Button
-                {
-                    Text = "Batal",
-                    Width = 120,
-                    Height = 40,
-                    BackColor = Color.IndianRed,
-                    ForeColor = Color.White,
-                    FlatStyle = FlatStyle.Flat,
-                    Left = 10,
-                    Top = panel1.Height - 60
-                };
-
-                btnBatal.Click += (s, e) =>
-                {
-                    if (MessageBox.Show("Batalkan semua pesanan?", "Konfirmasi",
-                        MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    {
-                        keranjang.Clear();
-                        UpdateRingkasan();
-                    }
-                };
-
-                panel1.Controls.Add(btnBatal);
             }
-        }
 
-        private void TambahQty(m_produk produk)
-        {
-            var idx = keranjang.FindIndex(x => x.produk.IdProduk == produk.IdProduk);
-            if (idx >= 0)
+            // Tombol Batal
+            Button btnBatal = new Button
             {
-                var item = keranjang[idx];
-                keranjang[idx] = (item.produk, item.jumlah + 1);
-                UpdateRingkasan();
-            }
-        }
+                Text = "Batal",
+                Width = 120,
+                Height = 40,
+                Left = 10,
+                Top = top + 10,
+                BackColor = Color.IndianRed,
+                ForeColor = Color.White
+            };
 
-        private void KurangiQty(m_produk produk)
-        {
-            var idx = keranjang.FindIndex(x => x.produk.IdProduk == produk.IdProduk);
-            if (idx >= 0)
+            btnBatal.Click += (s, e) =>
             {
-                var item = keranjang[idx];
-                if (item.jumlah - 1 <= 0)
-                    keranjang.RemoveAt(idx);
-                else
-                    keranjang[idx] = (item.produk, item.jumlah - 1);
+                if (MessageBox.Show("Batalkan semua pesanan?", "Konfirmasi",
+                    MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    keranjang.Clear();
+                    UpdateRingkasan();
+                }
+            };
 
-                UpdateRingkasan();
-            }
+            panel1.Controls.Add(btnBatal);
         }
 
-        private List<(m_produk, int)> ConvertKeranjangSupplier() => new List<(m_produk, int)>(keranjang);
-
-        private int GetTotalItem()
-        {
-            int total = 0;
-            foreach (var x in keranjang) total += x.jumlah;
-            return total;
-        }
-
-        private void btncheckoutcustomer_Click(object sender, EventArgs e)
+        private void btnrestock_Click(object sender, EventArgs e)
         {
             if (keranjang.Count == 0)
             {
@@ -311,7 +282,7 @@ namespace TaniGrow2.View
                     IdProduk = item.produk.IdProduk,
                     Jumlah = item.jumlah,
                     TanggalMasuk = DateTime.Now,
-                    IdUser = userId
+                    //IdUser = u
                 };
                 ctrlProduk.CatatSupply(dataSupply);
             }
@@ -323,12 +294,11 @@ namespace TaniGrow2.View
             UpdateRingkasan();
         }
 
-        private void btnkembaliadmin_Click(object sender, EventArgs e)
+
+        private void btnkembali_Click(object sender, EventArgs e)
         {
             new v_katalogadmin().Show();
             this.Close();
         }
-
-       
     }
 }

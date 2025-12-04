@@ -33,9 +33,9 @@
             btnriwayatadmin = new Button();
             btnkatalogadmin = new Button();
             btnlogout = new Button();
-            dataGridView1 = new DataGridView();
             btncustomer = new Button();
             btnbarang = new Button();
+            dataGridView1 = new DataGridView();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
@@ -89,41 +89,43 @@
             btnlogout.UseVisualStyleBackColor = true;
             btnlogout.Click += btnlogout_Click;
             // 
-            // dataGridView1
-            // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(235, 73);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(544, 365);
-            dataGridView1.TabIndex = 26;
-            // 
             // btncustomer
             // 
-            btncustomer.Location = new Point(529, 25);
+            btncustomer.Location = new Point(641, 25);
             btncustomer.Name = "btncustomer";
             btncustomer.Size = new Size(94, 29);
             btncustomer.TabIndex = 27;
             btncustomer.Text = "Customer";
             btncustomer.UseVisualStyleBackColor = true;
+            btncustomer.Click += btncustomer_Click;
             // 
             // btnbarang
             // 
-            btnbarang.Location = new Point(648, 25);
+            btnbarang.Location = new Point(774, 25);
             btnbarang.Name = "btnbarang";
             btnbarang.Size = new Size(94, 29);
             btnbarang.TabIndex = 28;
             btnbarang.Text = "Barang";
             btnbarang.UseVisualStyleBackColor = true;
+            btnbarang.Click += btnbarang_Click;
+            // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(271, 73);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.Size = new Size(945, 553);
+            dataGridView1.TabIndex = 29;
             // 
             // v_riwayatadmin
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1924, 1055);
+            Controls.Add(dataGridView1);
             Controls.Add(btnbarang);
             Controls.Add(btncustomer);
-            Controls.Add(dataGridView1);
             Controls.Add(btnprofiladmin);
             Controls.Add(btnpesananadmin);
             Controls.Add(btnriwayatadmin);
@@ -142,8 +144,8 @@
         private Button btnriwayatadmin;
         private Button btnkatalogadmin;
         private Button btnlogout;
-        private DataGridView dataGridView1;
         private Button btncustomer;
         private Button btnbarang;
+        private DataGridView dataGridView1;
     }
 }

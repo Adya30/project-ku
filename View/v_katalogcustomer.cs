@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using TaniGrow2.Controller;
+﻿using TaniGrow2.Controller;
 using TaniGrow2.Model;
 
 namespace TaniGrow2.View
@@ -372,9 +363,9 @@ namespace TaniGrow2.View
 
             if (result == DialogResult.Yes)
             {
-                v_pembayaran bayar = new v_pembayaran(keranjang);
-                bayar.Show();
-                this.Close();
+                //v_pembayaran bayar = new v_pembayaran(keranjang);
+                //bayar.Show();
+                //this.Close();
             }
         }
 
@@ -387,15 +378,15 @@ namespace TaniGrow2.View
 
         private void btnriwayatcustomer_Click(object sender, EventArgs e)
         {
-            new v_riwayatcustomer().Show();
-            this.Close();
+            //new v_riwayatcustomer().Show();
+            //this.Close();
         }
 
-        
+
         private void btnprofilcustomer_Click(object sender, EventArgs e)
         {
-            new v_profilcustomer().Show();
-            this.Close();
+            //new v_profilcustomer().Show();
+            //this.Close();
         }
 
         private void btnlogout_Click(object sender, EventArgs e)
@@ -410,8 +401,8 @@ namespace TaniGrow2.View
 
         private void btnpesanancustomer_Click(object sender, EventArgs e)
         {
-            new v_pesanancustomer().Show();
-            this.Close();
+            //new v_pesanancustomer().Show();
+            //this.Close();
         }
     }
 }

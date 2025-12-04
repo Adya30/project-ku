@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TaniGrow2.Model
+﻿namespace TaniGrow2.Model
 {
     public class m_stokMasuk
     {
@@ -13,6 +7,9 @@ namespace TaniGrow2.Model
         public int Jumlah { get; set; }
         public DateTime TanggalMasuk { get; set; }
         public int? IdUser { get; set; }
+
+        public m_produk Produk { get; set; }
+        public User User { get; set; }
     }
 
 }

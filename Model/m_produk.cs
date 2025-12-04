@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TaniGrow2.Model
+﻿namespace TaniGrow2.Model
 {
     public class m_produk
     {

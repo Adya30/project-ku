@@ -35,6 +35,7 @@
             btnprofiladmin = new Button();
             btnlogout = new Button();
             btntambahkatalog = new Button();
+            btnstok = new Button();
             SuspendLayout();
             // 
             // flowpanel
@@ -104,11 +105,22 @@
             btntambahkatalog.UseVisualStyleBackColor = true;
             btntambahkatalog.Click += btntambahkatalog_Click;
             // 
+            // btnstok
+            // 
+            btnstok.Location = new Point(525, 25);
+            btnstok.Name = "btnstok";
+            btnstok.Size = new Size(94, 29);
+            btnstok.TabIndex = 7;
+            btnstok.Text = "Stok";
+            btnstok.UseVisualStyleBackColor = true;
+            btnstok.Click += btnstok_Click;
+            // 
             // v_katalogadmin
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnstok);
             Controls.Add(btntambahkatalog);
             Controls.Add(btnlogout);
             Controls.Add(btnprofiladmin);
@@ -118,7 +130,6 @@
             Controls.Add(flowpanel);
             Name = "v_katalogadmin";
             Text = "v_katalogadmin";
-            Load += v_katalogadmin_Load;
             ResumeLayout(false);
         }
 
