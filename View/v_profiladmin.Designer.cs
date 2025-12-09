@@ -28,127 +28,142 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(v_profiladmin));
+            tbpassword = new TextBox();
+            tbusername = new TextBox();
+            btnedit = new Button();
+            btnsimpan = new Button();
+            btnbatal = new Button();
             btnlogout = new Button();
             btnprofiladmin = new Button();
             btnriwayatadmin = new Button();
             btnpesananadmin = new Button();
-            btnkatalogadminn = new Button();
-            btnbatal = new Button();
-            tbpassword = new TextBox();
-            tbusername = new TextBox();
-            btnsimpan = new Button();
-            btnedit = new Button();
+            btnkatalogadmin = new Button();
             SuspendLayout();
+            // 
+            // tbpassword
+            // 
+            tbpassword.BorderStyle = BorderStyle.None;
+            tbpassword.Font = new Font("Segoe UI", 16F);
+            tbpassword.Location = new Point(601, 462);
+            tbpassword.Name = "tbpassword";
+            tbpassword.Size = new Size(319, 36);
+            tbpassword.TabIndex = 26;
+            // 
+            // tbusername
+            // 
+            tbusername.BorderStyle = BorderStyle.None;
+            tbusername.Font = new Font("Segoe UI", 16F);
+            tbusername.Location = new Point(601, 344);
+            tbusername.Name = "tbusername";
+            tbusername.Size = new Size(319, 36);
+            tbusername.TabIndex = 27;
+            // 
+            // btnedit
+            // 
+            btnedit.Font = new Font("Segoe UI", 16F);
+            btnedit.Location = new Point(878, 862);
+            btnedit.Name = "btnedit";
+            btnedit.Size = new Size(148, 58);
+            btnedit.TabIndex = 30;
+            btnedit.Text = "Edit";
+            btnedit.UseVisualStyleBackColor = true;
+            btnedit.Click += btnedit_Click;
+            // 
+            // btnsimpan
+            // 
+            btnsimpan.Font = new Font("Segoe UI", 16F);
+            btnsimpan.Location = new Point(1075, 862);
+            btnsimpan.Name = "btnsimpan";
+            btnsimpan.Size = new Size(180, 58);
+            btnsimpan.TabIndex = 29;
+            btnsimpan.Text = "Simpan";
+            btnsimpan.UseVisualStyleBackColor = true;
+            btnsimpan.Click += btnsimpan_Click;
+            // 
+            // btnbatal
+            // 
+            btnbatal.Font = new Font("Segoe UI", 16F);
+            btnbatal.Location = new Point(1300, 862);
+            btnbatal.Name = "btnbatal";
+            btnbatal.Size = new Size(180, 58);
+            btnbatal.TabIndex = 28;
+            btnbatal.Text = "Batal";
+            btnbatal.UseVisualStyleBackColor = true;
+            btnbatal.Click += btnbatal_Click;
             // 
             // btnlogout
             // 
-            btnlogout.Location = new Point(19, 385);
+            btnlogout.Font = new Font("Segoe UI", 16F);
+            btnlogout.Location = new Point(86, 916);
             btnlogout.Name = "btnlogout";
-            btnlogout.Size = new Size(94, 29);
-            btnlogout.TabIndex = 12;
+            btnlogout.Size = new Size(180, 58);
+            btnlogout.TabIndex = 37;
             btnlogout.Text = "Log Out";
             btnlogout.UseVisualStyleBackColor = true;
             btnlogout.Click += btnlogout_Click;
             // 
             // btnprofiladmin
             // 
-            btnprofiladmin.Location = new Point(19, 244);
+            btnprofiladmin.Font = new Font("Segoe UI", 16F);
+            btnprofiladmin.Location = new Point(86, 597);
             btnprofiladmin.Name = "btnprofiladmin";
-            btnprofiladmin.Size = new Size(94, 29);
-            btnprofiladmin.TabIndex = 11;
+            btnprofiladmin.Size = new Size(180, 58);
+            btnprofiladmin.TabIndex = 36;
             btnprofiladmin.Text = "Profil";
             btnprofiladmin.UseVisualStyleBackColor = true;
-            btnprofiladmin.Click += btnprofiladmin_Click;
             // 
             // btnriwayatadmin
             // 
-            btnriwayatadmin.Location = new Point(19, 190);
+            btnriwayatadmin.Font = new Font("Segoe UI", 16F);
+            btnriwayatadmin.Location = new Point(86, 475);
             btnriwayatadmin.Name = "btnriwayatadmin";
-            btnriwayatadmin.Size = new Size(94, 29);
-            btnriwayatadmin.TabIndex = 10;
+            btnriwayatadmin.Size = new Size(180, 58);
+            btnriwayatadmin.TabIndex = 35;
             btnriwayatadmin.Text = "Riwayat";
             btnriwayatadmin.UseVisualStyleBackColor = true;
             btnriwayatadmin.Click += btnriwayatadmin_Click;
             // 
             // btnpesananadmin
             // 
-            btnpesananadmin.Location = new Point(19, 129);
+            btnpesananadmin.Font = new Font("Segoe UI", 16F);
+            btnpesananadmin.Location = new Point(86, 358);
             btnpesananadmin.Name = "btnpesananadmin";
-            btnpesananadmin.Size = new Size(94, 29);
-            btnpesananadmin.TabIndex = 9;
+            btnpesananadmin.Size = new Size(180, 58);
+            btnpesananadmin.TabIndex = 34;
             btnpesananadmin.Text = "Pesanan";
             btnpesananadmin.UseVisualStyleBackColor = true;
             btnpesananadmin.Click += btnpesananadmin_Click;
             // 
-            // btnkatalogadminn
+            // btnkatalogadmin
             // 
-            btnkatalogadminn.Location = new Point(19, 73);
-            btnkatalogadminn.Name = "btnkatalogadminn";
-            btnkatalogadminn.Size = new Size(94, 29);
-            btnkatalogadminn.TabIndex = 8;
-            btnkatalogadminn.Text = "Katalog";
-            btnkatalogadminn.UseVisualStyleBackColor = true;
-            btnkatalogadminn.Click += btnkatalogadmin_Click;
-            // 
-            // btnbatal
-            // 
-            btnbatal.Location = new Point(454, 326);
-            btnbatal.Name = "btnbatal";
-            btnbatal.Size = new Size(103, 29);
-            btnbatal.TabIndex = 13;
-            btnbatal.Text = "Batal";
-            btnbatal.UseVisualStyleBackColor = true;
-            btnbatal.Click += btnbatal_Click;
-            // 
-            // tbpassword
-            // 
-            tbpassword.Location = new Point(377, 228);
-            tbpassword.Name = "tbpassword";
-            tbpassword.Size = new Size(125, 27);
-            tbpassword.TabIndex = 15;
-            // 
-            // tbusername
-            // 
-            tbusername.Location = new Point(377, 160);
-            tbusername.Name = "tbusername";
-            tbusername.Size = new Size(125, 27);
-            tbusername.TabIndex = 14;
-            // 
-            // btnsimpan
-            // 
-            btnsimpan.Location = new Point(329, 326);
-            btnsimpan.Name = "btnsimpan";
-            btnsimpan.Size = new Size(103, 29);
-            btnsimpan.TabIndex = 16;
-            btnsimpan.Text = "Simpan";
-            btnsimpan.UseVisualStyleBackColor = true;
-            btnsimpan.Click += btnsimpan_Click;
-            // 
-            // btnedit
-            // 
-            btnedit.Location = new Point(647, 39);
-            btnedit.Name = "btnedit";
-            btnedit.Size = new Size(103, 29);
-            btnedit.TabIndex = 17;
-            btnedit.Text = "Edit";
-            btnedit.UseVisualStyleBackColor = true;
-            btnedit.Click += btnedit_Click;
+            btnkatalogadmin.Font = new Font("Segoe UI", 16F);
+            btnkatalogadmin.Location = new Point(86, 240);
+            btnkatalogadmin.Name = "btnkatalogadmin";
+            btnkatalogadmin.Size = new Size(180, 58);
+            btnkatalogadmin.TabIndex = 33;
+            btnkatalogadmin.Text = "Katalog";
+            btnkatalogadmin.UseVisualStyleBackColor = true;
+            btnkatalogadmin.Click += btnkatalogadmin_Click;
             // 
             // v_profiladmin
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(btnedit);
-            Controls.Add(btnsimpan);
-            Controls.Add(tbpassword);
-            Controls.Add(tbusername);
-            Controls.Add(btnbatal);
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(1924, 1055);
             Controls.Add(btnlogout);
             Controls.Add(btnprofiladmin);
             Controls.Add(btnriwayatadmin);
             Controls.Add(btnpesananadmin);
-            Controls.Add(btnkatalogadminn);
+            Controls.Add(btnkatalogadmin);
+            Controls.Add(btnedit);
+            Controls.Add(btnsimpan);
+            Controls.Add(btnbatal);
+            Controls.Add(tbusername);
+            Controls.Add(tbpassword);
+            DoubleBuffered = true;
             Name = "v_profiladmin";
             Text = "v_profiladmin";
             ResumeLayout(false);
@@ -156,16 +171,15 @@
         }
 
         #endregion
-
+        private TextBox tbpassword;
+        private TextBox tbusername;
+        private Button btnedit;
+        private Button btnsimpan;
+        private Button btnbatal;
         private Button btnlogout;
         private Button btnprofiladmin;
         private Button btnriwayatadmin;
         private Button btnpesananadmin;
-        private Button btnkatalogadminn;
-        private Button btnbatal;
-        private TextBox tbpassword;
-        private TextBox tbusername;
-        private Button btnsimpan;
-        private Button btnedit;
+        private Button btnkatalogadmin;
     }
 }

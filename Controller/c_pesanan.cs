@@ -13,6 +13,9 @@ namespace TaniGrow2.Controller
             db = new connectdata();
         }
 
+        // =======================================================
+        // 1. USER — GET PESANAN BELUM SELESAI
+        // =======================================================
         public List<(m_transaksi transaksi, m_detailtransaksi detail, m_produk produk)>
         GetPesananBelumSelesaiByUser(int userId)
         {
@@ -24,16 +27,28 @@ namespace TaniGrow2.Controller
 
                 string query = @"
                 SELECT 
-                    t.id_transaksi, t.tanggal_transaksi, t.status_transaksi, t.pembayaran, t.alamat,
-                    d.id_detailtransaksi, d.jumlah, d.id_produk,
-                    p.id_produk, p.nama_produk, p.deskripsi, p.harga_satuan,
-                    k.nama_kategori
+                    t.id_transaksi,          -- 0
+                    t.tanggal_transaksi,     -- 1
+                    t.status_transaksi,      -- 2
+                    t.alamat,                -- 3
+                    t.id_user,               -- 4
+                    t.bukti_pembayaran,      -- 5
+
+                    d.id_detailtransaksi,    -- 6
+                    d.jumlah,                -- 7
+                    d.id_produk,             -- 8
+
+                    p.id_produk,             -- 9
+                    p.nama_produk,           -- 10
+                    p.deskripsi,             -- 11
+                    p.harga_satuan,          -- 12
+
+                    k.nama_kategori          -- 13
                 FROM transaksi t
                 LEFT JOIN detail_transaksi d ON t.id_transaksi = d.id_transaksi
                 LEFT JOIN produk p ON d.id_produk = p.id_produk
                 LEFT JOIN kategori k ON p.id_kategoriproduk = k.id_kategoriProduk
-                WHERE t.id_user = @uid
-                  AND t.status_transaksi != 'Selesai'
+                WHERE t.id_user = @uid AND t.status_transaksi != 'Selesai'
                 ORDER BY t.tanggal_transaksi DESC;
                 ";
 
@@ -50,27 +65,26 @@ namespace TaniGrow2.Controller
                                 id_transaksi = reader.GetInt32(0),
                                 tanggal_transaksi = reader.GetDateTime(1),
                                 status_transaksi = reader.GetString(2),
-                                pembayaran = reader.IsDBNull(3) ? "" : reader.GetString(3),
-                                alamat = reader.IsDBNull(4) ? "" : reader.GetString(4),
-                                id_user = userId
-                            };
-
-                            var produk = new m_produk
-                            {
-                                IdProduk = reader.IsDBNull(8) ? 0 : reader.GetInt32(8),
-                                NamaProduk = reader.IsDBNull(9) ? "" : reader.GetString(9),
-                                Deskripsi = reader.IsDBNull(10) ? "" : reader.GetString(10),
-                                HargaSatuan = reader.IsDBNull(11) ? 0 : reader.GetInt32(11), // pastikan ini benar
-                                NamaKategori = reader.IsDBNull(12) ? "" : reader.GetString(12)
+                                alamat = reader.IsDBNull(3) ? "" : reader.GetString(3),
+                                id_user = reader.GetInt32(4),
+                                bukti_pembayaran = reader.IsDBNull(5) ? null : (byte[])reader[5]
                             };
 
                             var detail = new m_detailtransaksi
                             {
-                                id_detailtransaksi = reader.IsDBNull(5) ? 0 : reader.GetInt32(5),
-                                jumlah_transaksi = reader.IsDBNull(6) ? 0 : reader.GetInt32(6),
-                                id_transaksi = transaksi.id_transaksi,
-                                id_produk = reader.IsDBNull(7) ? 0 : reader.GetInt32(7),
-                                HargaSatuan = produk.HargaSatuan // ambil dari produk
+                                id_detailtransaksi = reader.IsDBNull(6) ? 0 : reader.GetInt32(6),
+                                jumlah_transaksi = reader.IsDBNull(7) ? 0 : reader.GetInt32(7),
+                                id_produk = reader.IsDBNull(8) ? 0 : reader.GetInt32(8),
+                                id_transaksi = transaksi.id_transaksi
+                            };
+
+                            var produk = new m_produk
+                            {
+                                IdProduk = reader.IsDBNull(9) ? 0 : reader.GetInt32(9),
+                                NamaProduk = reader.IsDBNull(10) ? "" : reader.GetString(10),
+                                Deskripsi = reader.IsDBNull(11) ? "" : reader.GetString(11),
+                                HargaSatuan = reader.IsDBNull(12) ? 0 : reader.GetInt32(12),
+                                NamaKategori = reader.IsDBNull(13) ? "" : reader.GetString(13)
                             };
 
                             list.Add((transaksi, detail, produk));
@@ -82,6 +96,9 @@ namespace TaniGrow2.Controller
             return list;
         }
 
+        // =======================================================
+        // 2. USER — GET PESANAN SELESAI
+        // =======================================================
         public List<(m_transaksi transaksi, m_detailtransaksi detail, m_produk produk)>
         GetPesananSelesaiByUser(int userId)
         {
@@ -92,19 +109,31 @@ namespace TaniGrow2.Controller
                 conn.Open();
 
                 string query = @"
-            SELECT 
-                t.id_transaksi, t.tanggal_transaksi, t.status_transaksi, t.pembayaran, t.alamat,
-                d.id_detailtransaksi, d.jumlah, d.id_produk,
-                p.id_produk, p.nama_produk, p.deskripsi, p.harga_satuan,
-                k.nama_kategori
-            FROM transaksi t
-            LEFT JOIN detail_transaksi d ON t.id_transaksi = d.id_transaksi
-            LEFT JOIN produk p ON d.id_produk = p.id_produk
-            LEFT JOIN kategori k ON p.id_kategoriproduk = k.id_kategoriProduk
-            WHERE t.id_user = @uid
-              AND t.status_transaksi = 'Selesai'
-            ORDER BY t.tanggal_transaksi DESC;
-        ";
+                SELECT 
+                    t.id_transaksi,          -- 0
+                    t.tanggal_transaksi,     -- 1
+                    t.status_transaksi,      -- 2
+                    t.alamat,                -- 3
+                    t.id_user,               -- 4
+                    t.bukti_pembayaran,      -- 5
+
+                    d.id_detailtransaksi,    -- 6
+                    d.jumlah,                -- 7
+                    d.id_produk,             -- 8
+
+                    p.id_produk,             -- 9
+                    p.nama_produk,           -- 10
+                    p.deskripsi,             -- 11
+                    p.harga_satuan,          -- 12
+
+                    k.nama_kategori          -- 13
+                FROM transaksi t
+                LEFT JOIN detail_transaksi d ON t.id_transaksi = d.id_transaksi
+                LEFT JOIN produk p ON d.id_produk = p.id_produk
+                LEFT JOIN kategori k ON p.id_kategoriproduk = k.id_kategoriProduk
+                WHERE t.id_user = @uid AND t.status_transaksi = 'Selesai'
+                ORDER BY t.tanggal_transaksi DESC;
+                ";
 
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
@@ -119,27 +148,26 @@ namespace TaniGrow2.Controller
                                 id_transaksi = reader.GetInt32(0),
                                 tanggal_transaksi = reader.GetDateTime(1),
                                 status_transaksi = reader.GetString(2),
-                                pembayaran = reader.IsDBNull(3) ? "" : reader.GetString(3),
-                                alamat = reader.IsDBNull(4) ? "" : reader.GetString(4),
-                                id_user = userId
-                            };
-
-                            var produk = new m_produk
-                            {
-                                IdProduk = reader.IsDBNull(8) ? 0 : reader.GetInt32(8),
-                                NamaProduk = reader.IsDBNull(9) ? "" : reader.GetString(9),
-                                Deskripsi = reader.IsDBNull(10) ? "" : reader.GetString(10),
-                                HargaSatuan = reader.IsDBNull(11) ? 0 : reader.GetInt32(11),
-                                NamaKategori = reader.IsDBNull(12) ? "" : reader.GetString(12)
+                                alamat = reader.IsDBNull(3) ? "" : reader.GetString(3),
+                                id_user = reader.GetInt32(4),
+                                bukti_pembayaran = reader.IsDBNull(5) ? null : (byte[])reader[5]
                             };
 
                             var detail = new m_detailtransaksi
                             {
-                                id_detailtransaksi = reader.IsDBNull(5) ? 0 : reader.GetInt32(5),
-                                jumlah_transaksi = reader.IsDBNull(6) ? 0 : reader.GetInt32(6),
-                                id_transaksi = transaksi.id_transaksi,
-                                id_produk = reader.IsDBNull(7) ? 0 : reader.GetInt32(7),
-                                HargaSatuan = produk.HargaSatuan
+                                id_detailtransaksi = reader.IsDBNull(6) ? 0 : reader.GetInt32(6),
+                                jumlah_transaksi = reader.IsDBNull(7) ? 0 : reader.GetInt32(7),
+                                id_produk = reader.IsDBNull(8) ? 0 : reader.GetInt32(8),
+                                id_transaksi = transaksi.id_transaksi
+                            };
+
+                            var produk = new m_produk
+                            {
+                                IdProduk = reader.IsDBNull(9) ? 0 : reader.GetInt32(9),
+                                NamaProduk = reader.IsDBNull(10) ? "" : reader.GetString(10),
+                                Deskripsi = reader.IsDBNull(11) ? "" : reader.GetString(11),
+                                HargaSatuan = reader.IsDBNull(12) ? 0 : reader.GetInt32(12),
+                                NamaKategori = reader.IsDBNull(13) ? "" : reader.GetString(13)
                             };
 
                             list.Add((transaksi, detail, produk));
@@ -151,9 +179,9 @@ namespace TaniGrow2.Controller
             return list;
         }
 
-
-
-
+        // =======================================================
+        // 3. ADMIN — GET SEMUA PESANAN
+        // =======================================================
         public List<(m_transaksi transaksi, m_detailtransaksi detail, m_produk produk, User user)>
         GetSemuaPesananAdmin()
         {
@@ -164,22 +192,33 @@ namespace TaniGrow2.Controller
                 conn.Open();
 
                 string query = @"
-                SELECT 
-                    t.id_transaksi, t.tanggal_transaksi, t.status_transaksi, 
-                    t.pembayaran, t.alamat, t.id_user,
+        SELECT 
+            t.id_transaksi,          -- 0
+            t.tanggal_transaksi,     -- 1
+            t.status_transaksi,      -- 2
+            t.alamat,                -- 3
+            t.id_user,               -- 4
+            t.bukti_pembayaran,      -- 5
 
-                    d.id_detailtransaksi, d.jumlah, p.harga_satuan, d.id_produk,
+            d.id_detailtransaksi,    -- 6
+            d.jumlah,                -- 7
+            d.id_produk,             -- 8
 
-                    p.id_produk, p.nama_produk, k.nama_kategori, p.deskripsi,
+            p.id_produk,             -- 9
+            p.nama_produk,           -- 10
+            p.deskripsi,             -- 11
+            p.harga_satuan,          -- 12
+            k.nama_kategori,         -- 13
 
-                    u.id_user, u.nama_lengkap
-                FROM transaksi t
-                INNER JOIN detail_transaksi d ON t.id_transaksi = d.id_transaksi
-                INNER JOIN produk p ON d.id_produk = p.id_produk
-                INNER JOIN kategori k ON p.id_kategoriproduk = k.id_kategoriproduk
-                INNER JOIN users u ON t.id_user = u.id_user
-                ORDER BY u.nama_lengkap ASC, t.tanggal_transaksi DESC;
-                ";
+            u.id_user,               -- 14
+            u.nama_lengkap           -- 15
+        FROM transaksi t
+        INNER JOIN detail_transaksi d ON t.id_transaksi = d.id_transaksi
+        INNER JOIN produk p ON d.id_produk = p.id_produk
+        INNER JOIN kategori k ON p.id_kategoriproduk = k.id_kategoriproduk
+        INNER JOIN users u ON t.id_user = u.id_user
+        ORDER BY u.nama_lengkap ASC, t.tanggal_transaksi DESC;
+        ";
 
                 using (var cmd = new NpgsqlCommand(query, conn))
                 using (var reader = cmd.ExecuteReader())
@@ -191,26 +230,26 @@ namespace TaniGrow2.Controller
                             id_transaksi = reader.GetInt32(0),
                             tanggal_transaksi = reader.GetDateTime(1),
                             status_transaksi = reader.GetString(2),
-                            pembayaran = reader.GetString(3),
-                            alamat = reader.IsDBNull(4) ? "" : reader.GetString(4),
-                            id_user = reader.GetInt32(5),
+                            alamat = reader.IsDBNull(3) ? "" : reader.GetString(3),
+                            id_user = reader.GetInt32(4),
+                            bukti_pembayaran = reader.IsDBNull(5) ? null : (byte[])reader[5]
                         };
 
                         var detail = new m_detailtransaksi
                         {
                             id_detailtransaksi = reader.GetInt32(6),
                             jumlah_transaksi = reader.GetInt32(7),
-                            HargaSatuan = reader.GetInt32(8),
-                            id_transaksi = transaksi.id_transaksi,
-                            id_produk = reader.GetInt32(9)
+                            id_produk = reader.GetInt32(8),
+                            id_transaksi = transaksi.id_transaksi
                         };
 
                         var produk = new m_produk
                         {
-                            IdProduk = reader.GetInt32(10),
-                            NamaProduk = reader.GetString(11),
-                            NamaKategori = reader.GetString(12),
-                            Deskripsi = reader.IsDBNull(13) ? "" : reader.GetString(13)
+                            IdProduk = reader.GetInt32(9),
+                            NamaProduk = reader.GetString(10),
+                            Deskripsi = reader.IsDBNull(11) ? "" : reader.GetString(11),
+                            HargaSatuan = reader.GetInt32(12),
+                            NamaKategori = reader.GetString(13)
                         };
 
                         var user = new User
@@ -227,32 +266,25 @@ namespace TaniGrow2.Controller
             return list;
         }
 
+
+        // =======================================================
+        // 4. UPDATE STATUS TRANSAKSI
+        // =======================================================
         public bool UpdateStatusPesanan(int idTransaksi, string statusBaru)
         {
-            try
-            {
-                using (var conn = db.getConn())
-                {
-                    conn.Open();
-                    string query = @"
-                UPDATE transaksi
-                SET status_transaksi = @status
-                WHERE id_transaksi = @id";
+            using var conn = db.getConn();
+            conn.Open();
 
-                    using (var cmd = new NpgsqlCommand(query, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@status", statusBaru);
-                        cmd.Parameters.AddWithValue("@id", idTransaksi);
+            string query = @"UPDATE transaksi SET status_transaksi = @status WHERE id_transaksi = @id";
 
-                        return cmd.ExecuteNonQuery() > 0;
-                    }
-                }
-            }
-            catch
-            {
-                return false;
-            }
+            using var cmd = new NpgsqlCommand(query, conn);
+            cmd.Parameters.AddWithValue("@status", statusBaru);
+            cmd.Parameters.AddWithValue("@id", idTransaksi);
+
+            return cmd.ExecuteNonQuery() > 0;
         }
+    
+
         public List<m_stokMasuk> GetRiwayatStokMasuk()
         {
             List<m_stokMasuk> list = new List<m_stokMasuk>();

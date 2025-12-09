@@ -28,78 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(v_katalogadmin));
             flowpanel = new FlowLayoutPanel();
-            btnkatalogadmin = new Button();
-            btnpesananadmin = new Button();
-            btnriwayatadmin = new Button();
-            btnprofiladmin = new Button();
-            btnlogout = new Button();
             btntambahkatalog = new Button();
             btnstok = new Button();
+            btnlogout = new Button();
+            btnprofiladmin = new Button();
+            btnriwayatadmin = new Button();
+            btnpesananadmin = new Button();
+            btnkatalogadmin = new Button();
             SuspendLayout();
             // 
             // flowpanel
             // 
-            flowpanel.Location = new Point(152, 73);
+            flowpanel.BackColor = Color.Transparent;
+            flowpanel.Location = new Point(511, 261);
             flowpanel.Name = "flowpanel";
-            flowpanel.Size = new Size(636, 365);
+            flowpanel.Size = new Size(1386, 782);
             flowpanel.TabIndex = 0;
-            // 
-            // btnkatalogadmin
-            // 
-            btnkatalogadmin.Location = new Point(25, 73);
-            btnkatalogadmin.Name = "btnkatalogadmin";
-            btnkatalogadmin.Size = new Size(94, 29);
-            btnkatalogadmin.TabIndex = 1;
-            btnkatalogadmin.Text = "Katalog";
-            btnkatalogadmin.UseVisualStyleBackColor = true;
-            btnkatalogadmin.Click += btnkatalogadmin_Click;
-            // 
-            // btnpesananadmin
-            // 
-            btnpesananadmin.Location = new Point(25, 135);
-            btnpesananadmin.Name = "btnpesananadmin";
-            btnpesananadmin.Size = new Size(94, 29);
-            btnpesananadmin.TabIndex = 2;
-            btnpesananadmin.Text = "Pesanan";
-            btnpesananadmin.UseVisualStyleBackColor = true;
-            btnpesananadmin.Click += btnpesananadmin_Click;
-            // 
-            // btnriwayatadmin
-            // 
-            btnriwayatadmin.Location = new Point(25, 196);
-            btnriwayatadmin.Name = "btnriwayatadmin";
-            btnriwayatadmin.Size = new Size(94, 29);
-            btnriwayatadmin.TabIndex = 3;
-            btnriwayatadmin.Text = "Riwayat";
-            btnriwayatadmin.UseVisualStyleBackColor = true;
-            btnriwayatadmin.Click += btnriwayatadmin_Click;
-            // 
-            // btnprofiladmin
-            // 
-            btnprofiladmin.Location = new Point(25, 250);
-            btnprofiladmin.Name = "btnprofiladmin";
-            btnprofiladmin.Size = new Size(94, 29);
-            btnprofiladmin.TabIndex = 4;
-            btnprofiladmin.Text = "Profil";
-            btnprofiladmin.UseVisualStyleBackColor = true;
-            btnprofiladmin.Click += btnprofiladmin_Click;
-            // 
-            // btnlogout
-            // 
-            btnlogout.Location = new Point(25, 391);
-            btnlogout.Name = "btnlogout";
-            btnlogout.Size = new Size(94, 29);
-            btnlogout.TabIndex = 5;
-            btnlogout.Text = "Log Out";
-            btnlogout.UseVisualStyleBackColor = true;
-            btnlogout.Click += btnlogout_Click;
             // 
             // btntambahkatalog
             // 
-            btntambahkatalog.Location = new Point(637, 25);
+            btntambahkatalog.Font = new Font("Segoe UI", 16F);
+            btntambahkatalog.Location = new Point(511, 185);
             btntambahkatalog.Name = "btntambahkatalog";
-            btntambahkatalog.Size = new Size(140, 29);
+            btntambahkatalog.Size = new Size(180, 58);
             btntambahkatalog.TabIndex = 6;
             btntambahkatalog.Text = "Tambah Katalog";
             btntambahkatalog.UseVisualStyleBackColor = true;
@@ -107,26 +60,83 @@
             // 
             // btnstok
             // 
-            btnstok.Location = new Point(525, 25);
+            btnstok.Font = new Font("Segoe UI", 16F);
+            btnstok.Location = new Point(726, 185);
             btnstok.Name = "btnstok";
-            btnstok.Size = new Size(94, 29);
+            btnstok.Size = new Size(180, 58);
             btnstok.TabIndex = 7;
             btnstok.Text = "Stok";
             btnstok.UseVisualStyleBackColor = true;
             btnstok.Click += btnstok_Click;
             // 
+            // btnlogout
+            // 
+            btnlogout.Font = new Font("Segoe UI", 16F);
+            btnlogout.Location = new Point(86, 906);
+            btnlogout.Name = "btnlogout";
+            btnlogout.Size = new Size(180, 58);
+            btnlogout.TabIndex = 32;
+            btnlogout.Text = "Log Out";
+            btnlogout.UseVisualStyleBackColor = true;
+            btnlogout.Click += btnlogout_Click;
+            // 
+            // btnprofiladmin
+            // 
+            btnprofiladmin.Font = new Font("Segoe UI", 16F);
+            btnprofiladmin.Location = new Point(86, 587);
+            btnprofiladmin.Name = "btnprofiladmin";
+            btnprofiladmin.Size = new Size(180, 58);
+            btnprofiladmin.TabIndex = 31;
+            btnprofiladmin.Text = "Profil";
+            btnprofiladmin.UseVisualStyleBackColor = true;
+            btnprofiladmin.Click += btnprofiladmin_Click;
+            // 
+            // btnriwayatadmin
+            // 
+            btnriwayatadmin.Font = new Font("Segoe UI", 16F);
+            btnriwayatadmin.Location = new Point(86, 465);
+            btnriwayatadmin.Name = "btnriwayatadmin";
+            btnriwayatadmin.Size = new Size(180, 58);
+            btnriwayatadmin.TabIndex = 30;
+            btnriwayatadmin.Text = "Riwayat";
+            btnriwayatadmin.UseVisualStyleBackColor = true;
+            btnriwayatadmin.Click += btnriwayatadmin_Click;
+            // 
+            // btnpesananadmin
+            // 
+            btnpesananadmin.Font = new Font("Segoe UI", 16F);
+            btnpesananadmin.Location = new Point(86, 348);
+            btnpesananadmin.Name = "btnpesananadmin";
+            btnpesananadmin.Size = new Size(180, 58);
+            btnpesananadmin.TabIndex = 29;
+            btnpesananadmin.Text = "Pesanan";
+            btnpesananadmin.UseVisualStyleBackColor = true;
+            btnpesananadmin.Click += btnpesananadmin_Click;
+            // 
+            // btnkatalogadmin
+            // 
+            btnkatalogadmin.Font = new Font("Segoe UI", 16F);
+            btnkatalogadmin.Location = new Point(86, 230);
+            btnkatalogadmin.Name = "btnkatalogadmin";
+            btnkatalogadmin.Size = new Size(180, 58);
+            btnkatalogadmin.TabIndex = 28;
+            btnkatalogadmin.Text = "Katalog";
+            btnkatalogadmin.UseVisualStyleBackColor = true;
+            btnkatalogadmin.Click += btnkatalogadmin_Click;
+            // 
             // v_katalogadmin
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(btnstok);
-            Controls.Add(btntambahkatalog);
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            ClientSize = new Size(1924, 1055);
             Controls.Add(btnlogout);
             Controls.Add(btnprofiladmin);
             Controls.Add(btnriwayatadmin);
             Controls.Add(btnpesananadmin);
             Controls.Add(btnkatalogadmin);
+            Controls.Add(btnstok);
+            Controls.Add(btntambahkatalog);
             Controls.Add(flowpanel);
             Name = "v_katalogadmin";
             Text = "v_katalogadmin";
@@ -136,12 +146,12 @@
         #endregion
 
         private FlowLayoutPanel flowpanel;
-        private Button btnkatalogadmin;
-        private Button btnpesananadmin;
-        private Button btnriwayatadmin;
-        private Button btnprofiladmin;
-        private Button btnlogout;
         private Button btntambahkatalog;
         private Button btnstok;
+        private Button btnlogout;
+        private Button btnprofiladmin;
+        private Button btnriwayatadmin;
+        private Button btnpesananadmin;
+        private Button btnkatalogadmin;
     }
 }

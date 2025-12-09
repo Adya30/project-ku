@@ -28,12 +28,93 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "v_pembayaran";
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(v_pembayaran));
+            labeltotal = new Label();
+            pictureBoxBukti = new PictureBox();
+            tbalamat = new RichTextBox();
+            btnbayar = new Button();
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBoxBukti).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            SuspendLayout();
+            // 
+            // labeltotal
+            // 
+            labeltotal.AutoSize = true;
+            labeltotal.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labeltotal.Location = new Point(770, 496);
+            labeltotal.Name = "labeltotal";
+            labeltotal.Size = new Size(104, 41);
+            labeltotal.TabIndex = 0;
+            labeltotal.Text = "label1";
+            // 
+            // pictureBoxBukti
+            // 
+            pictureBoxBukti.BackColor = Color.SeaGreen;
+            pictureBoxBukti.Location = new Point(1063, 553);
+            pictureBoxBukti.Name = "pictureBoxBukti";
+            pictureBoxBukti.Size = new Size(469, 321);
+            pictureBoxBukti.TabIndex = 1;
+            pictureBoxBukti.TabStop = false;
+            pictureBoxBukti.Click += pictureBoxBukti_Click;
+            // 
+            // tbalamat
+            // 
+            tbalamat.Font = new Font("Segoe UI", 16F);
+            tbalamat.Location = new Point(770, 310);
+            tbalamat.Name = "tbalamat";
+            tbalamat.Size = new Size(1007, 96);
+            tbalamat.TabIndex = 2;
+            tbalamat.Text = "";
+            // 
+            // btnbayar
+            // 
+            btnbayar.Font = new Font("Segoe UI", 16F);
+            btnbayar.Location = new Point(1217, 896);
+            btnbayar.Name = "btnbayar";
+            btnbayar.Size = new Size(180, 58);
+            btnbayar.TabIndex = 3;
+            btnbayar.Text = "Bayar";
+            btnbayar.UseVisualStyleBackColor = true;
+            btnbayar.Click += btnbayar_Click;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
+            pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox1.Location = new Point(43, 218);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(641, 778);
+            pictureBox1.TabIndex = 4;
+            pictureBox1.TabStop = false;
+            // 
+            // v_pembayaran
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(1924, 1055);
+            Controls.Add(pictureBox1);
+            Controls.Add(btnbayar);
+            Controls.Add(tbalamat);
+            Controls.Add(pictureBoxBukti);
+            Controls.Add(labeltotal);
+            DoubleBuffered = true;
+            Name = "v_pembayaran";
+            Text = "v_pembayaran";
+            ((System.ComponentModel.ISupportInitialize)pictureBoxBukti).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private Label labeltotal;
+        private PictureBox pictureBoxBukti;
+        private RichTextBox tbalamat;
+        private Button btnbayar;
+        private PictureBox pictureBox1;
     }
 }

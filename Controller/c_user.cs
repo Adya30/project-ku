@@ -69,12 +69,11 @@ namespace TaniGrow2.Controller
             return "LOGIN_GAGAL";
         }
 
-        public string UpdateProfile(string nama, string username, string telp, string pass, string konfirmasi)
+        public string UpdateProfile(string nama, string username, string telp, string pass)
         {
             if (CurrentUser == null) return "Tidak ada user login!";
 
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(pass)) return "Username dan password harus diisi!";
-            if (pass != konfirmasi) return "Konfirmasi password tidak cocok!";
 
             using var conn = new NpgsqlConnection(connString); conn.Open();
 

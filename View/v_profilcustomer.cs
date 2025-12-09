@@ -1,12 +1,22 @@
-﻿using System.Security.Policy;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using TaniGrow2.Controller;
+using TaniGrow2.Model;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace TaniGrow2.View
 {
-    public partial class v_profiladmin : Form
+    public partial class v_profilcustomer : Form
     {
         c_user controller = new c_user();
-        public v_profiladmin()
+        public v_profilcustomer()
         {
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
@@ -22,12 +32,16 @@ namespace TaniGrow2.View
         {
             if (c_user.CurrentUser != null)
             {
+                tbnamalengkap.Text = c_user.CurrentUser.NamaLengkap;
                 tbusername.Text = c_user.CurrentUser.Username;
+                tbnotelp.Text = c_user.CurrentUser.NoTelp;
                 tbpassword.Text = c_user.CurrentUser.Password;
             }
             else
             {
+                tbnamalengkap.Text = "";
                 tbusername.Text = "";
+                tbnotelp.Text = "";
                 tbpassword.Text = "";
             }
         }
@@ -37,10 +51,14 @@ namespace TaniGrow2.View
         // ================================================
         private void SetViewMode()
         {
+            tbnamalengkap.ReadOnly = true;
             tbusername.ReadOnly = true;
+            tbnotelp.ReadOnly = true;
             tbpassword.ReadOnly = true;
 
+            tbnamalengkap.BackColor = Color.LightGray;
             tbusername.BackColor = Color.LightGray;
+            tbnotelp.BackColor = Color.LightGray;
             tbpassword.BackColor = Color.LightGray;
 
             btnedit.Visible = true;
@@ -53,10 +71,14 @@ namespace TaniGrow2.View
         // ================================================
         private void SetEditMode()
         {
+            tbnamalengkap.ReadOnly = false;
             tbusername.ReadOnly = false;
+            tbnotelp.ReadOnly = false;
             tbpassword.ReadOnly = false;
 
+            tbnamalengkap.BackColor = Color.White;
             tbusername.BackColor = Color.White;
+            tbnotelp.BackColor = Color.White;
             tbpassword.BackColor = Color.White;
 
             btnedit.Visible = false;
@@ -77,18 +99,20 @@ namespace TaniGrow2.View
         // ================================================
         private void btnsimpan_Click(object sender, EventArgs e)
         {
-            if (tbusername.Text.Trim() == "" || tbpassword.Text.Trim() == "")
+            if (tbusername.Text.Trim() == "" || tbpassword.Text.Trim() == "" ||
+                tbnamalengkap.Text.Trim() == "" || tbnotelp.Text.Trim() == "")
             {
-                MessageBox.Show("Username dan Password tidak boleh kosong!");
+                MessageBox.Show("Tidak boleh kosong!");
                 return;
             }
 
-            // Simpan ke objek user
-            string hasil = controller.UpdateProfile("",
-                tbusername.Text.Trim(),"",
+            string hasil = controller.UpdateProfile(
+                tbnamalengkap.Text.Trim(),
+                tbusername.Text.Trim(),
+                tbnotelp.Text.Trim(),
                 tbpassword.Text.Trim()
             );
-           
+
             MessageBox.Show(hasil);
 
             if (hasil == "Update Profil Berhasil")
@@ -96,6 +120,7 @@ namespace TaniGrow2.View
                 SetViewMode();
             }
         }
+
 
         // ================================================
         // TOMBOL CANCEL
@@ -106,31 +131,7 @@ namespace TaniGrow2.View
             SetViewMode();
         }
 
-        private void btnkatalogadmin_Click(object sender, EventArgs e)
-        {
-            new v_katalogadmin().Show();
-            this.Close();
-        }
-
-        private void btnpesananadmin_Click(object sender, EventArgs e)
-        {
-            new v_pesananadmin().Show();
-            this.Close();
-        }
-
-        private void btnriwayatadmin_Click(object sender, EventArgs e)
-        {
-            new v_riwayatadmin().Show();
-            this.Close();
-        }
-
-
-        private void btnprofiladmin_Click(object sender, EventArgs e)
-        {
-            new v_profiladmin().Show();
-            this.Close();
-        }
-
+        
         private void btnlogout_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Apakah Anda yakin ingin keluar?",
@@ -143,29 +144,26 @@ namespace TaniGrow2.View
             }
         }
 
-        private void v_katalogadmin_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnprofilcustomer_Click(object sender, EventArgs e)
         {
-
         }
 
         private void btnriwayatcustomer_Click(object sender, EventArgs e)
         {
-
+            new v_riwayatcustomer().Show();
+            this.Close();
         }
 
         private void btnpesanancustomer_Click(object sender, EventArgs e)
         {
-
+            new v_pesanancustomer().Show();
+            this.Close();
         }
 
         private void btnkatalogcustomer_Click(object sender, EventArgs e)
         {
-
+            new v_katalogcustomer().Show();
+            this.Close();
         }
     }
 }

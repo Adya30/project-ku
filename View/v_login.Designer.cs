@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(v_login));
             linkdaftar = new LinkLabel();
             tblogin_username = new TextBox();
             tblogin_password = new TextBox();
@@ -37,9 +38,10 @@
             // linkdaftar
             // 
             linkdaftar.AutoSize = true;
-            linkdaftar.Location = new Point(656, 328);
+            linkdaftar.Font = new Font("Segoe UI", 16F);
+            linkdaftar.Location = new Point(1690, 777);
             linkdaftar.Name = "linkdaftar";
-            linkdaftar.Size = new Size(51, 20);
+            linkdaftar.Size = new Size(90, 37);
             linkdaftar.TabIndex = 0;
             linkdaftar.TabStop = true;
             linkdaftar.Text = "Daftar";
@@ -47,23 +49,30 @@
             // 
             // tblogin_username
             // 
-            tblogin_username.Location = new Point(241, 87);
+            tblogin_username.BackColor = SystemColors.Menu;
+            tblogin_username.BorderStyle = BorderStyle.None;
+            tblogin_username.Font = new Font("Segoe UI", 16F);
+            tblogin_username.Location = new Point(1143, 294);
             tblogin_username.Name = "tblogin_username";
-            tblogin_username.Size = new Size(125, 27);
+            tblogin_username.Size = new Size(125, 36);
             tblogin_username.TabIndex = 1;
             // 
             // tblogin_password
             // 
-            tblogin_password.Location = new Point(241, 149);
+            tblogin_password.BackColor = SystemColors.Menu;
+            tblogin_password.BorderStyle = BorderStyle.None;
+            tblogin_password.Font = new Font("Segoe UI", 16F);
+            tblogin_password.Location = new Point(1143, 468);
             tblogin_password.Name = "tblogin_password";
-            tblogin_password.Size = new Size(125, 27);
+            tblogin_password.Size = new Size(125, 36);
             tblogin_password.TabIndex = 2;
             // 
             // btnlogin
             // 
-            btnlogin.Location = new Point(323, 278);
+            btnlogin.Font = new Font("Segoe UI", 16F);
+            btnlogin.Location = new Point(1316, 599);
             btnlogin.Name = "btnlogin";
-            btnlogin.Size = new Size(94, 29);
+            btnlogin.Size = new Size(151, 62);
             btnlogin.TabIndex = 3;
             btnlogin.Text = "Login";
             btnlogin.UseVisualStyleBackColor = true;
@@ -73,11 +82,14 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(1924, 1055);
             Controls.Add(btnlogin);
             Controls.Add(tblogin_password);
             Controls.Add(tblogin_username);
             Controls.Add(linkdaftar);
+            DoubleBuffered = true;
             Name = "v_login";
             Text = "v_login";
             ResumeLayout(false);

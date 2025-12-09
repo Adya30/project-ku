@@ -6,7 +6,6 @@
         public int jumlah_transaksi { get; set; }
         public int? id_transaksi { get; set; }
         public int? id_produk { get; set; }
-        public int HargaSatuan { get; set; }
     }
 
 }

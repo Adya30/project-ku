@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(v_tambahkatalog));
             btnpicture = new PictureBox();
             cbjenisproduk = new ComboBox();
             tbnama_produk = new TextBox();
@@ -36,65 +37,70 @@
             tbstok = new TextBox();
             btnsimpan = new Button();
             btnbatal = new Button();
-            btnlogout = new Button();
-            btnkatalogadmin = new Button();
-            btnriwayatadmin = new Button();
-            btnpesananadmin = new Button();
-            btnprofiladmin = new Button();
             ((System.ComponentModel.ISupportInitialize)btnpicture).BeginInit();
             SuspendLayout();
             // 
             // btnpicture
             // 
-            btnpicture.Location = new Point(295, 75);
+            btnpicture.Location = new Point(69, 257);
             btnpicture.Name = "btnpicture";
-            btnpicture.Size = new Size(125, 146);
+            btnpicture.Size = new Size(578, 697);
             btnpicture.TabIndex = 0;
             btnpicture.TabStop = false;
             btnpicture.Click += btnpicture_Click;
             // 
             // cbjenisproduk
             // 
+            cbjenisproduk.Font = new Font("Segoe UI", 16F);
             cbjenisproduk.FormattingEnabled = true;
-            cbjenisproduk.Location = new Point(453, 131);
+            cbjenisproduk.Location = new Point(779, 428);
             cbjenisproduk.Name = "cbjenisproduk";
-            cbjenisproduk.Size = new Size(151, 28);
+            cbjenisproduk.Size = new Size(273, 45);
             cbjenisproduk.TabIndex = 1;
             // 
             // tbnama_produk
             // 
-            tbnama_produk.Location = new Point(453, 75);
+            tbnama_produk.BorderStyle = BorderStyle.FixedSingle;
+            tbnama_produk.Font = new Font("Segoe UI", 16F);
+            tbnama_produk.Location = new Point(779, 311);
             tbnama_produk.Name = "tbnama_produk";
-            tbnama_produk.Size = new Size(125, 27);
+            tbnama_produk.Size = new Size(273, 43);
             tbnama_produk.TabIndex = 2;
             // 
             // rbdeskripsi
             // 
-            rbdeskripsi.Location = new Point(333, 264);
+            rbdeskripsi.BorderStyle = BorderStyle.FixedSingle;
+            rbdeskripsi.Font = new Font("Segoe UI", 16F);
+            rbdeskripsi.Location = new Point(779, 649);
             rbdeskripsi.Name = "rbdeskripsi";
-            rbdeskripsi.Size = new Size(362, 120);
+            rbdeskripsi.Size = new Size(693, 107);
             rbdeskripsi.TabIndex = 3;
             rbdeskripsi.Text = "";
             // 
             // tbharga
             // 
-            tbharga.Location = new Point(601, 194);
+            tbharga.BorderStyle = BorderStyle.FixedSingle;
+            tbharga.Font = new Font("Segoe UI", 16F);
+            tbharga.Location = new Point(1139, 545);
             tbharga.Name = "tbharga";
-            tbharga.Size = new Size(125, 27);
+            tbharga.Size = new Size(199, 43);
             tbharga.TabIndex = 4;
             // 
             // tbstok
             // 
-            tbstok.Location = new Point(453, 194);
+            tbstok.BorderStyle = BorderStyle.FixedSingle;
+            tbstok.Font = new Font("Segoe UI", 16F);
+            tbstok.Location = new Point(779, 545);
             tbstok.Name = "tbstok";
-            tbstok.Size = new Size(125, 27);
+            tbstok.Size = new Size(125, 43);
             tbstok.TabIndex = 5;
             // 
             // btnsimpan
             // 
-            btnsimpan.Location = new Point(659, 26);
+            btnsimpan.Font = new Font("Segoe UI", 16F);
+            btnsimpan.Location = new Point(1110, 853);
             btnsimpan.Name = "btnsimpan";
-            btnsimpan.Size = new Size(94, 29);
+            btnsimpan.Size = new Size(180, 58);
             btnsimpan.TabIndex = 6;
             btnsimpan.Text = "Simpan";
             btnsimpan.UseVisualStyleBackColor = true;
@@ -102,74 +108,22 @@
             // 
             // btnbatal
             // 
-            btnbatal.Location = new Point(662, 75);
+            btnbatal.Font = new Font("Segoe UI", 16F);
+            btnbatal.Location = new Point(1334, 853);
             btnbatal.Name = "btnbatal";
-            btnbatal.Size = new Size(94, 29);
+            btnbatal.Size = new Size(180, 58);
             btnbatal.TabIndex = 7;
             btnbatal.Text = "Batal";
             btnbatal.UseVisualStyleBackColor = true;
             btnbatal.Click += btnbatal_Click;
             // 
-            // btnlogout
-            // 
-            btnlogout.Location = new Point(57, 400);
-            btnlogout.Name = "btnlogout";
-            btnlogout.Size = new Size(94, 29);
-            btnlogout.TabIndex = 8;
-            btnlogout.Text = "Log out";
-            btnlogout.UseVisualStyleBackColor = true;
-            btnlogout.Click += btnlogout_Click;
-            // 
-            // btnkatalogadmin
-            // 
-            btnkatalogadmin.Location = new Point(48, 75);
-            btnkatalogadmin.Name = "btnkatalogadmin";
-            btnkatalogadmin.Size = new Size(94, 29);
-            btnkatalogadmin.TabIndex = 9;
-            btnkatalogadmin.Text = "Katalog";
-            btnkatalogadmin.UseVisualStyleBackColor = true;
-            btnkatalogadmin.Click += btnkatalogadmin_Click;
-            // 
-            // btnriwayatadmin
-            // 
-            btnriwayatadmin.Location = new Point(48, 192);
-            btnriwayatadmin.Name = "btnriwayatadmin";
-            btnriwayatadmin.Size = new Size(94, 29);
-            btnriwayatadmin.TabIndex = 10;
-            btnriwayatadmin.Text = "Riwayat";
-            btnriwayatadmin.UseVisualStyleBackColor = true;
-            btnriwayatadmin.Click += btnriwayatadmin_Click;
-            // 
-            // btnpesananadmin
-            // 
-            btnpesananadmin.Location = new Point(48, 131);
-            btnpesananadmin.Name = "btnpesananadmin";
-            btnpesananadmin.Size = new Size(94, 29);
-            btnpesananadmin.TabIndex = 11;
-            btnpesananadmin.Text = "Pesanan";
-            btnpesananadmin.UseVisualStyleBackColor = true;
-            btnpesananadmin.Click += btnpesananadmin_Click;
-            // 
-            // btnprofiladmin
-            // 
-            btnprofiladmin.Location = new Point(48, 245);
-            btnprofiladmin.Name = "btnprofiladmin";
-            btnprofiladmin.Size = new Size(94, 29);
-            btnprofiladmin.TabIndex = 12;
-            btnprofiladmin.Text = "Profil";
-            btnprofiladmin.UseVisualStyleBackColor = true;
-            btnprofiladmin.Click += btnprofiladmin_Click;
-            // 
             // v_tambahkatalog
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(btnprofiladmin);
-            Controls.Add(btnpesananadmin);
-            Controls.Add(btnriwayatadmin);
-            Controls.Add(btnkatalogadmin);
-            Controls.Add(btnlogout);
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(1924, 1055);
             Controls.Add(btnbatal);
             Controls.Add(btnsimpan);
             Controls.Add(tbstok);
@@ -178,6 +132,7 @@
             Controls.Add(tbnama_produk);
             Controls.Add(cbjenisproduk);
             Controls.Add(btnpicture);
+            DoubleBuffered = true;
             Name = "v_tambahkatalog";
             Text = "v_tambahkatalog";
             ((System.ComponentModel.ISupportInitialize)btnpicture).EndInit();
@@ -195,10 +150,5 @@
         private TextBox tbstok;
         private Button btnsimpan;
         private Button btnbatal;
-        private Button btnlogout;
-        private Button btnkatalogadmin;
-        private Button btnriwayatadmin;
-        private Button btnpesananadmin;
-        private Button btnprofiladmin;
     }
 }

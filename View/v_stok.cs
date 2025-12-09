@@ -300,5 +300,10 @@ namespace TaniGrow2.View
             new v_katalogadmin().Show();
             this.Close();
         }
+
+        private void v_stok_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

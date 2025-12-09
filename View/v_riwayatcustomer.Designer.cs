@@ -1,6 +1,6 @@
 ﻿namespace TaniGrow2.View
 {
-    partial class v_katalogcustomer
+    partial class v_riwayatcustomer
     {
         /// <summary>
         /// Required designer variable.
@@ -28,52 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(v_katalogcustomer));
-            panelflow = new FlowLayoutPanel();
-            panel1 = new Panel();
-            btnbayar = new Button();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(v_riwayatcustomer));
+            dataGridView1 = new DataGridView();
             btnlogout = new Button();
             btnprofilcustomer = new Button();
             btnriwayatcustomer = new Button();
             btnpesanancustomer = new Button();
             btnkatalogcustomer = new Button();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
-            // panelflow
+            // dataGridView1
             // 
-            panelflow.BackColor = Color.Transparent;
-            panelflow.Location = new Point(450, 193);
-            panelflow.Name = "panelflow";
-            panelflow.Size = new Size(916, 850);
-            panelflow.TabIndex = 7;
-            panelflow.Paint += panelflow_Paint;
-            // 
-            // panel1
-            // 
-            panel1.BackColor = SystemColors.ButtonHighlight;
-            panel1.Location = new Point(1388, 255);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(492, 788);
-            panel1.TabIndex = 0;
-            // 
-            // btnbayar
-            // 
-            btnbayar.Font = new Font("Segoe UI", 16F);
-            btnbayar.Location = new Point(1388, 193);
-            btnbayar.Name = "btnbayar";
-            btnbayar.Size = new Size(492, 56);
-            btnbayar.TabIndex = 13;
-            btnbayar.Text = "Bayar";
-            btnbayar.UseVisualStyleBackColor = true;
-            btnbayar.Click += btnbayar_Click;
+            dataGridView1.BackgroundColor = SystemColors.ButtonHighlight;
+            dataGridView1.BorderStyle = BorderStyle.None;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(532, 242);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowHeadersWidth = 51;
+            dataGridView1.Size = new Size(1286, 722);
+            dataGridView1.TabIndex = 24;
             // 
             // btnlogout
             // 
             btnlogout.Font = new Font("Segoe UI", 16F);
-            btnlogout.Location = new Point(89, 900);
+            btnlogout.Location = new Point(84, 898);
             btnlogout.Name = "btnlogout";
             btnlogout.Size = new Size(180, 58);
-            btnlogout.TabIndex = 27;
+            btnlogout.TabIndex = 29;
             btnlogout.Text = "Log Out";
             btnlogout.UseVisualStyleBackColor = true;
             btnlogout.Click += btnlogout_Click;
@@ -81,10 +63,10 @@
             // btnprofilcustomer
             // 
             btnprofilcustomer.Font = new Font("Segoe UI", 16F);
-            btnprofilcustomer.Location = new Point(89, 581);
+            btnprofilcustomer.Location = new Point(84, 579);
             btnprofilcustomer.Name = "btnprofilcustomer";
             btnprofilcustomer.Size = new Size(180, 58);
-            btnprofilcustomer.TabIndex = 26;
+            btnprofilcustomer.TabIndex = 28;
             btnprofilcustomer.Text = "Profil";
             btnprofilcustomer.UseVisualStyleBackColor = true;
             btnprofilcustomer.Click += btnprofilcustomer_Click;
@@ -92,10 +74,10 @@
             // btnriwayatcustomer
             // 
             btnriwayatcustomer.Font = new Font("Segoe UI", 16F);
-            btnriwayatcustomer.Location = new Point(89, 459);
+            btnriwayatcustomer.Location = new Point(84, 457);
             btnriwayatcustomer.Name = "btnriwayatcustomer";
             btnriwayatcustomer.Size = new Size(180, 58);
-            btnriwayatcustomer.TabIndex = 25;
+            btnriwayatcustomer.TabIndex = 27;
             btnriwayatcustomer.Text = "Riwayat";
             btnriwayatcustomer.UseVisualStyleBackColor = true;
             btnriwayatcustomer.Click += btnriwayatcustomer_Click;
@@ -103,10 +85,10 @@
             // btnpesanancustomer
             // 
             btnpesanancustomer.Font = new Font("Segoe UI", 16F);
-            btnpesanancustomer.Location = new Point(89, 342);
+            btnpesanancustomer.Location = new Point(84, 340);
             btnpesanancustomer.Name = "btnpesanancustomer";
             btnpesanancustomer.Size = new Size(180, 58);
-            btnpesanancustomer.TabIndex = 24;
+            btnpesanancustomer.TabIndex = 26;
             btnpesanancustomer.Text = "Pesanan";
             btnpesanancustomer.UseVisualStyleBackColor = true;
             btnpesanancustomer.Click += btnpesanancustomer_Click;
@@ -114,36 +96,37 @@
             // btnkatalogcustomer
             // 
             btnkatalogcustomer.Font = new Font("Segoe UI", 16F);
-            btnkatalogcustomer.Location = new Point(89, 224);
+            btnkatalogcustomer.Location = new Point(84, 222);
             btnkatalogcustomer.Name = "btnkatalogcustomer";
             btnkatalogcustomer.Size = new Size(180, 58);
-            btnkatalogcustomer.TabIndex = 23;
+            btnkatalogcustomer.TabIndex = 25;
             btnkatalogcustomer.Text = "Katalog";
             btnkatalogcustomer.UseVisualStyleBackColor = true;
+            btnkatalogcustomer.Click += btnkatalogcustomer_Click;
             // 
-            // v_katalogcustomer
+            // v_riwayatcustomer
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1924, 1055);
             Controls.Add(btnlogout);
             Controls.Add(btnprofilcustomer);
             Controls.Add(btnriwayatcustomer);
             Controls.Add(btnpesanancustomer);
             Controls.Add(btnkatalogcustomer);
-            Controls.Add(btnbayar);
-            Controls.Add(panel1);
-            Controls.Add(panelflow);
-            Name = "v_katalogcustomer";
-            Text = "v_katalogcustomer";
+            Controls.Add(dataGridView1);
+            DoubleBuffered = true;
+            Name = "v_riwayatcustomer";
+            Text = "v_riwayatcustomer";
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-        private FlowLayoutPanel panelflow;
-        private Panel panel1;
-        private Button btnbayar;
+
+        private DataGridView dataGridView1;
         private Button btnlogout;
         private Button btnprofilcustomer;
         private Button btnriwayatcustomer;

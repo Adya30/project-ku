@@ -18,12 +18,7 @@ namespace TaniGrow2.View
 
         private void linklogin_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            OpenLoginForm();
-        }
-
-        public void OpenLoginForm()
-        {
-            new v_login().Show();
+            new v_login().Show();  
             this.Close();
         }
 

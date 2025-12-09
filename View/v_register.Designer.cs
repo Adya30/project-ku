@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            linkLabel1 = new LinkLabel();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(v_register));
             linklogin = new LinkLabel();
             btndaftar = new Button();
             tbnama_lengkap = new TextBox();
@@ -36,20 +36,15 @@
             tbno_telp = new TextBox();
             tbpassword_register = new TextBox();
             tbkonfirmasi_password = new TextBox();
+            label1 = new Label();
             SuspendLayout();
-            // 
-            // linkLabel1
-            // 
-            linkLabel1.AutoSize = true;
-            linkLabel1.Location = new Point(675, 353);
-            linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(0, 20);
-            linkLabel1.TabIndex = 0;
             // 
             // linklogin
             // 
             linklogin.AutoSize = true;
-            linklogin.Location = new Point(651, 312);
+            linklogin.BackColor = Color.Transparent;
+            linklogin.LinkColor = Color.White;
+            linklogin.Location = new Point(1620, 673);
             linklogin.Name = "linklogin";
             linklogin.Size = new Size(46, 20);
             linklogin.TabIndex = 1;
@@ -59,7 +54,7 @@
             // 
             // btndaftar
             // 
-            btndaftar.Location = new Point(530, 309);
+            btndaftar.Location = new Point(1392, 673);
             btndaftar.Name = "btndaftar";
             btndaftar.Size = new Size(94, 29);
             btndaftar.TabIndex = 2;
@@ -69,44 +64,67 @@
             // 
             // tbnama_lengkap
             // 
-            tbnama_lengkap.Location = new Point(369, 87);
+            tbnama_lengkap.BorderStyle = BorderStyle.None;
+            tbnama_lengkap.Font = new Font("Segoe UI", 16.2F);
+            tbnama_lengkap.Location = new Point(188, 277);
             tbnama_lengkap.Name = "tbnama_lengkap";
-            tbnama_lengkap.Size = new Size(125, 27);
+            tbnama_lengkap.Size = new Size(125, 36);
             tbnama_lengkap.TabIndex = 3;
             // 
             // tbusername_register
             // 
-            tbusername_register.Location = new Point(369, 136);
+            tbusername_register.BorderStyle = BorderStyle.None;
+            tbusername_register.Font = new Font("Segoe UI", 16.2F);
+            tbusername_register.Location = new Point(188, 432);
             tbusername_register.Name = "tbusername_register";
-            tbusername_register.Size = new Size(125, 27);
+            tbusername_register.Size = new Size(125, 36);
             tbusername_register.TabIndex = 4;
             // 
             // tbno_telp
             // 
-            tbno_telp.Location = new Point(369, 187);
+            tbno_telp.BorderStyle = BorderStyle.None;
+            tbno_telp.Font = new Font("Segoe UI", 16.2F);
+            tbno_telp.Location = new Point(188, 585);
             tbno_telp.Name = "tbno_telp";
-            tbno_telp.Size = new Size(125, 27);
+            tbno_telp.Size = new Size(125, 36);
             tbno_telp.TabIndex = 5;
             // 
             // tbpassword_register
             // 
-            tbpassword_register.Location = new Point(369, 233);
+            tbpassword_register.BorderStyle = BorderStyle.None;
+            tbpassword_register.Font = new Font("Segoe UI", 16.2F);
+            tbpassword_register.Location = new Point(188, 741);
             tbpassword_register.Name = "tbpassword_register";
-            tbpassword_register.Size = new Size(125, 27);
+            tbpassword_register.Size = new Size(125, 36);
             tbpassword_register.TabIndex = 6;
             // 
             // tbkonfirmasi_password
             // 
-            tbkonfirmasi_password.Location = new Point(369, 283);
+            tbkonfirmasi_password.BorderStyle = BorderStyle.None;
+            tbkonfirmasi_password.Font = new Font("Segoe UI", 16F);
+            tbkonfirmasi_password.Location = new Point(188, 893);
             tbkonfirmasi_password.Name = "tbkonfirmasi_password";
-            tbkonfirmasi_password.Size = new Size(125, 27);
+            tbkonfirmasi_password.Size = new Size(125, 36);
             tbkonfirmasi_password.TabIndex = 7;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.ForeColor = SystemColors.ButtonHighlight;
+            label1.Location = new Point(680, 158);
+            label1.Name = "label1";
+            label1.Size = new Size(0, 20);
+            label1.TabIndex = 9;
             // 
             // v_register
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(1924, 1055);
+            Controls.Add(label1);
             Controls.Add(tbkonfirmasi_password);
             Controls.Add(tbpassword_register);
             Controls.Add(tbno_telp);
@@ -114,7 +132,7 @@
             Controls.Add(tbnama_lengkap);
             Controls.Add(btndaftar);
             Controls.Add(linklogin);
-            Controls.Add(linkLabel1);
+            DoubleBuffered = true;
             Name = "v_register";
             Text = "v_register";
             ResumeLayout(false);
@@ -122,8 +140,6 @@
         }
 
         #endregion
-
-        private LinkLabel linkLabel1;
         private LinkLabel linklogin;
         private Button btndaftar;
         private TextBox tbnama_lengkap;
@@ -131,5 +147,6 @@
         private TextBox tbno_telp;
         private TextBox tbpassword_register;
         private TextBox tbkonfirmasi_password;
+        private Label label1;
     }
 }

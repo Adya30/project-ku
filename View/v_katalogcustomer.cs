@@ -27,6 +27,9 @@ namespace TaniGrow2.View
             UpdateRingkasan();
         }
 
+        // ===============================================================
+        // LOAD KATALOG
+        // ===============================================================
         public void LoadKatalog()
         {
             panelflow.Controls.Clear();
@@ -43,7 +46,9 @@ namespace TaniGrow2.View
             }
         }
 
-
+        // ---------------------------------------------------------------
+        // CARD PRODUK
+        // ---------------------------------------------------------------
         private Panel CreateCard(m_produk produk)
         {
             Panel card = new Panel
@@ -115,12 +120,6 @@ namespace TaniGrow2.View
                 ForeColor = Color.DimGray
             };
 
-            card.Controls.Add(lblDeskripsi);
-            card.Controls.Add(pic);
-            card.Controls.Add(lblNama);
-            card.Controls.Add(lblStok);
-            card.Controls.Add(lblHarga);
-
             Button btnPesan = new Button
             {
                 Text = "Pesan",
@@ -145,11 +144,19 @@ namespace TaniGrow2.View
                 UpdateRingkasan();
             };
 
+            card.Controls.Add(pic);
+            card.Controls.Add(lblNama);
+            card.Controls.Add(lblStok);
+            card.Controls.Add(lblHarga);
+            card.Controls.Add(lblDeskripsi);
             card.Controls.Add(btnPesan);
 
             return card;
         }
 
+        // ===============================================================
+        // TAMBAH KE KERANJANG
+        // ===============================================================
         private void TambahKeKeranjang(m_produk produk)
         {
             var idx = keranjang.FindIndex(x => x.produk.IdProduk == produk.IdProduk);
@@ -167,185 +174,143 @@ namespace TaniGrow2.View
             }
         }
 
+        // ===============================================================
+        // RINGKASAN KERANJANG
+        // ===============================================================
         private void UpdateRingkasan()
         {
-            panelRingkasan.Controls.Clear();
+            panel1.Controls.Clear();
 
             Panel panelItems = new Panel
             {
                 AutoScroll = true,
                 Left = 0,
                 Top = 0,
-                Width = panelRingkasan.Width - 5,
-                Height = panelRingkasan.Height - 120,
-                BorderStyle = BorderStyle.None
+                Width = panel1.Width - 5,
+                Height = panel1.Height - 150,
             };
-
-            panelRingkasan.Controls.Add(panelItems);
+            panel1.Controls.Add(panelItems);
 
             if (keranjang.Count == 0)
             {
-                Label lblKosong = new Label
+                panelItems.Controls.Add(new Label
                 {
                     Text = "Keranjang kosong",
                     Top = 10,
                     Left = 10,
-                    Width = 300,
                     Font = new Font("Arial", 10, FontStyle.Italic),
                     ForeColor = Color.Gray
-                };
-
-                panelItems.Controls.Add(lblKosong);
+                });
                 return;
             }
 
             int top = 10;
-            int total = HitungTotal();
 
-            foreach (var item in keranjang)
+            foreach (var item in keranjang.ToArray())
             {
-                int subtotal = item.produk.HargaSatuan * item.jumlah;
-
                 Panel row = new Panel
                 {
-                    Width = panelItems.Width - 25,
-                    Height = 35,
+                    Width = panelItems.Width - 20,
+                    Height = 40,
                     Left = 5,
                     Top = top
                 };
 
                 Label lblNama = new Label
                 {
-                    Text = $"{item.produk.NamaProduk}",
+                    Text = item.produk.NamaProduk,
                     Left = 5,
-                    Top = 8,
-                    Width = 180,
-                    Font = new Font("Arial", 9)
+                    Top = 10,
+                    Width = 200
                 };
                 row.Controls.Add(lblNama);
 
-                Button btnMin = new Button
-                {
-                    Text = "-",
-                    Width = 30,
-                    Height = 30,
-                    Left = 190,
-                    Top = 5,
-                    Font = new Font("Arial", 9),
-                };
-                btnMin.Click += (s, e) => { KurangiQty(item.produk); };
-                row.Controls.Add(btnMin);
-
-                Label lblJumlah = new Label
+                TextBox txtJumlah = new TextBox
                 {
                     Text = item.jumlah.ToString(),
-                    Left = 225,
+                    Left = 220,
                     Top = 8,
-                    Width = 30,
-                    Font = new Font("Arial", 9)
+                    Width = 50,
+                    TextAlign = HorizontalAlignment.Center
                 };
-                row.Controls.Add(lblJumlah);
-
-                Button btnPlus = new Button
+                txtJumlah.TextChanged += (s, e) =>
                 {
-                    Text = "+",
-                    Width = 30,
-                    Height = 30,
-                    Left = 260,
-                    Top = 5,
-                    Font = new Font("Arial", 9)
+                    if (int.TryParse(txtJumlah.Text, out int newQty))
+                    {
+                        if (newQty <= 0)
+                            keranjang.Remove(item);
+                        else
+                        {
+                            var idx = keranjang.FindIndex(x => x.produk.IdProduk == item.produk.IdProduk);
+                            keranjang[idx] = (item.produk, newQty);
+                        }
+                        UpdateRingkasan();
+                    }
                 };
-                btnPlus.Click += (s, e) => { TambahQty(item.produk); };
-                row.Controls.Add(btnPlus);
+                row.Controls.Add(txtJumlah);
+
+                Button btnHapus = new Button
+                {
+                    Text = "X",
+                    Width = 35,
+                    Height = 25,
+                    Left = 280,
+                    Top = 7,
+                    BackColor = Color.IndianRed,
+                    ForeColor = Color.White
+                };
+                btnHapus.Click += (s, e) =>
+                {
+                    keranjang.Remove(item);
+                    UpdateRingkasan();
+                };
+                row.Controls.Add(btnHapus);
 
                 panelItems.Controls.Add(row);
-
-                top += 40;
+                top += 45;
             }
 
-            Label lblTotal = new Label
+            // TOTAL
+            panel1.Controls.Add(new Label
             {
-                Text = $"TOTAL = Rp {total}",
+                Text = $"TOTAL = Rp {HitungTotal():N0}",
                 Left = 10,
+                Top = panel1.Height - 135,
                 Width = 400,
-                Font = new Font("Arial", 10, FontStyle.Bold),
-                ForeColor = Color.DarkGreen,
-                Top = panelRingkasan.Height - 110
-            };
+                Font = new Font("Arial", 11, FontStyle.Bold),
+                ForeColor = Color.DarkGreen
+            });
 
-            panelRingkasan.Controls.Add(lblTotal);
-
+            // Batal
             Button btnBatal = new Button
             {
                 Text = "Batal",
                 Width = 120,
                 Height = 40,
-                BackColor = Color.IndianRed,
-                ForeColor = Color.White,
-                FlatStyle = FlatStyle.Flat,
                 Left = 10,
-                Top = panelRingkasan.Height - 60
+                Top = panel1.Height - 90,
+                BackColor = Color.IndianRed,
+                ForeColor = Color.White
             };
-
             btnBatal.Click += (s, e) =>
             {
-                if (MessageBox.Show("Batalkan semua pesanan?", "Konfirmasi",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show("Batalkan semua pesanan?", "Konfirmasi", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     keranjang.Clear();
                     UpdateRingkasan();
                 }
             };
-
-            panelRingkasan.Controls.Add(btnBatal);
+            panel1.Controls.Add(btnBatal);
         }
 
         private int HitungTotal()
         {
-            int total = 0;
-            foreach (var item in keranjang)
-                total += item.produk.HargaSatuan * item.jumlah;
-            return total;
+            return keranjang.Sum(x => x.produk.HargaSatuan * x.jumlah);
         }
 
-        private void TambahQty(m_produk produk)
-        {
-            var idx = keranjang.FindIndex(x => x.produk.IdProduk == produk.IdProduk);
-            if (idx >= 0)
-            {
-                var item = keranjang[idx];
-
-                if (item.jumlah + 1 > produk.StokProduk)
-                {
-                    MessageBox.Show("Jumlah melebihi stok tersedia!");
-                    return;
-                }
-
-                keranjang[idx] = (item.produk, item.jumlah + 1);
-                UpdateRingkasan();
-            }
-        }
-
-        private void KurangiQty(m_produk produk)
-        {
-            var idx = keranjang.FindIndex(x => x.produk.IdProduk == produk.IdProduk);
-            if (idx >= 0)
-            {
-                var item = keranjang[idx];
-
-                if (item.jumlah - 1 <= 0)
-                {
-                    keranjang.RemoveAt(idx);
-                }
-                else
-                {
-                    keranjang[idx] = (item.produk, item.jumlah - 1);
-                }
-
-                UpdateRingkasan();
-            }
-        }
-
+        // ===============================================================
+        // BUTTON BAYAR
+        // ===============================================================
         private void btnbayar_Click(object sender, EventArgs e)
         {
             if (keranjang.Count == 0)
@@ -354,41 +319,14 @@ namespace TaniGrow2.View
                 return;
             }
 
-            var result = MessageBox.Show(
-                "Apakah Anda yakin ingin melakukan pembayaran?",
-                "Konfirmasi Pembayaran",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question
-            );
-
-            if (result == DialogResult.Yes)
-            {
-                //v_pembayaran bayar = new v_pembayaran(keranjang);
-                //bayar.Show();
-                //this.Close();
-            }
-        }
-
-
-        private void btnkatalaogcustomer_Click(object sender, EventArgs e)
-        {
-            new v_katalogcustomer(userId).Show();
+            v_pembayaran bayar = new v_pembayaran(keranjang);
+            bayar.Show();
             this.Close();
         }
 
-        private void btnriwayatcustomer_Click(object sender, EventArgs e)
-        {
-            //new v_riwayatcustomer().Show();
-            //this.Close();
-        }
-
-
-        private void btnprofilcustomer_Click(object sender, EventArgs e)
-        {
-            //new v_profilcustomer().Show();
-            //this.Close();
-        }
-
+        // ===============================================================
+        // NAVIGASI LAIN
+        // ===============================================================
         private void btnlogout_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Apakah Anda yakin ingin keluar?", "Logout",
@@ -399,10 +337,34 @@ namespace TaniGrow2.View
             }
         }
 
+        private void btnprofilcustomer_Click(object sender, EventArgs e)
+        {
+            new v_profilcustomer().Show();
+            this.Close();
+        }
+
+        private void btnriwayatcustomer_Click(object sender, EventArgs e)
+        {
+            new v_riwayatcustomer().Show();
+            this.Close();
+        }
+
         private void btnpesanancustomer_Click(object sender, EventArgs e)
         {
-            //new v_pesanancustomer().Show();
-            //this.Close();
+            new v_pesanancustomer().Show();
+            this.Close();
+
+        }
+
+        private void btnkatalogcustomer_Click(object sender, EventArgs e)
+        {
+            new v_katalogcustomer().Show();
+            this.Close();
+        }
+
+        private void panelflow_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
