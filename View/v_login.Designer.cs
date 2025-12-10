@@ -29,23 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(v_login));
-            linkdaftar = new LinkLabel();
             tblogin_username = new TextBox();
             tblogin_password = new TextBox();
             btnlogin = new Button();
+            btndaftar = new Button();
             SuspendLayout();
-            // 
-            // linkdaftar
-            // 
-            linkdaftar.AutoSize = true;
-            linkdaftar.Font = new Font("Segoe UI", 16F);
-            linkdaftar.Location = new Point(1690, 777);
-            linkdaftar.Name = "linkdaftar";
-            linkdaftar.Size = new Size(90, 37);
-            linkdaftar.TabIndex = 0;
-            linkdaftar.TabStop = true;
-            linkdaftar.Text = "Daftar";
-            linkdaftar.LinkClicked += linkdaftar_LinkClicked;
             // 
             // tblogin_username
             // 
@@ -54,7 +42,7 @@
             tblogin_username.Font = new Font("Segoe UI", 16F);
             tblogin_username.Location = new Point(1143, 294);
             tblogin_username.Name = "tblogin_username";
-            tblogin_username.Size = new Size(125, 36);
+            tblogin_username.Size = new Size(266, 36);
             tblogin_username.TabIndex = 1;
             // 
             // tblogin_password
@@ -64,7 +52,7 @@
             tblogin_password.Font = new Font("Segoe UI", 16F);
             tblogin_password.Location = new Point(1143, 468);
             tblogin_password.Name = "tblogin_password";
-            tblogin_password.Size = new Size(125, 36);
+            tblogin_password.Size = new Size(266, 36);
             tblogin_password.TabIndex = 2;
             // 
             // btnlogin
@@ -78,6 +66,17 @@
             btnlogin.UseVisualStyleBackColor = true;
             btnlogin.Click += btnlogin_Click;
             // 
+            // btndaftar
+            // 
+            btndaftar.Font = new Font("Segoe UI", 16F);
+            btndaftar.Location = new Point(1616, 813);
+            btndaftar.Name = "btndaftar";
+            btndaftar.Size = new Size(151, 62);
+            btndaftar.TabIndex = 4;
+            btndaftar.Text = "Daftar";
+            btndaftar.UseVisualStyleBackColor = true;
+            btndaftar.Click += btndaftar_Click;
+            // 
             // v_login
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -85,10 +84,10 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1924, 1055);
+            Controls.Add(btndaftar);
             Controls.Add(btnlogin);
             Controls.Add(tblogin_password);
             Controls.Add(tblogin_username);
-            Controls.Add(linkdaftar);
             DoubleBuffered = true;
             Name = "v_login";
             Text = "v_login";
@@ -97,10 +96,9 @@
         }
 
         #endregion
-
-        private LinkLabel linkdaftar;
         private TextBox tblogin_username;
         private TextBox tblogin_password;
         private Button btnlogin;
+        private Button btndaftar;
     }
 }

@@ -11,7 +11,6 @@ namespace TaniGrow2.View
             InitializeComponent();
             this.WindowState = FormWindowState.Maximized;
             userController = new c_user();
-            linkdaftar.LinkClicked += LinkDaftar_Click;
         }
 
         private void LinkDaftar_Click(object sender, LinkLabelLinkClickedEventArgs e)
@@ -58,6 +57,13 @@ namespace TaniGrow2.View
 
 
         private void linkdaftar_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            v_register reg = new v_register();
+            reg.Show();
+            this.Hide();
+        }
+
+        private void btndaftar_Click(object sender, EventArgs e)
         {
             v_register reg = new v_register();
             reg.Show();

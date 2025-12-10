@@ -142,43 +142,7 @@ namespace TaniGrow2.View
                 this.Hide();
             };
 
-            //Button btnHardDelete = new Button
-            //{
-            //    Text = "Hapus",
-            //    Width = 110,
-            //    Height = 35,
-            //    Top = card.Height - 70,
-            //    Left = 135,
-            //    BackColor = Color.IndianRed,
-            //    ForeColor = Color.White,
-            //    FlatStyle = FlatStyle.Flat
-            //};
-            //btnHardDelete.Click += (s, e) =>
-            //{
-            //    var confirm = MessageBox.Show(
-            //        $"Apakah Anda yakin ingin menghapus produk '{produk.NamaProduk}'?",
-            //        "Konfirmasi Hapus",
-            //        MessageBoxButtons.YesNo,
-            //        MessageBoxIcon.Warning
-            //    );
-
-            //    if (confirm == DialogResult.Yes)
-            //    {
-            //        if (ctrlProduk.HapusProduk(produk.IdProduk))
-            //        {
-            //            MessageBox.Show("Produk berhasil dihapus (stok diset 0).", "Sukses");
-            //            LoadKatalog();
-            //        }
-            //        else
-            //        {
-            //            MessageBox.Show("Gagal menghapus produk.", "Error");
-            //        }
-            //    }
-            //};
-
-
             card.Controls.Add(btnEdit);
-            //card.Controls.Add(btnHardDelete);
 
             return card;
         }

@@ -27,10 +27,8 @@ namespace TaniGrow2.View
             LoadPesanan();
         }
 
-        // --------------------- HANDLER ERROR COMBOBOX ----------------------
         private void DataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
-            // Jika error di kolom StatusEdit, set default agar tidak melempar dialog
             if (e.ColumnIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].Name == "StatusEdit")
             {
                 try
@@ -41,16 +39,13 @@ namespace TaniGrow2.View
                 catch { }
             }
 
-            // jangan munculkan exception dialog
             e.ThrowException = false;
         }
 
-        // -------------------------- LOAD DATA PESANAN --------------------------
         private void LoadPesanan()
         {
             var list = ctrl.GetSemuaPesananAdmin();
 
-            // DATA TABLE
             DataTable dt = new DataTable();
             dt.Columns.Add("ID", typeof(int));
             dt.Columns.Add("Tanggal", typeof(string));
@@ -60,22 +55,17 @@ namespace TaniGrow2.View
             dt.Columns.Add("Alamat", typeof(string));
             dt.Columns.Add("HargaSatuan", typeof(int));
             dt.Columns.Add("Subtotal", typeof(int));
-            // simpan raw bytes di kolom terpisah (agar tidak bentrok dengan image column)
             dt.Columns.Add("BuktiPembayaranData", typeof(byte[]));
             dt.Columns.Add("Status", typeof(string));
 
-            // ------------------ LOOP DATA PESANAN -------------------
             foreach (var item in list)
             {
-                // normalisasi status
                 string statusNormalized = NormalizeStatus(item.transaksi?.status_transaksi);
 
                 if (statusNormalized == "Selesai")
                     continue;
 
-                
                 int hargaSatuan = item.produk.HargaSatuan;
-
                 int jumlah = item.detail?.jumlah_transaksi ?? 0;
                 int subtotal = jumlah * hargaSatuan;
 
@@ -93,15 +83,12 @@ namespace TaniGrow2.View
                 );
             }
 
-
-            // ====== ASSIGN DATATABLE ======
             dataGridView1.DataSource = dt;
 
-            // ------------------ TAMBAHKAN KOLOM GAMBAR (BuktiGambar) ------------------
+            // Tambah kolom gambar
             if (dataGridView1.Columns.Contains("BuktiGambar"))
                 dataGridView1.Columns.Remove("BuktiGambar");
 
-            // buat kolom gambar
             DataGridViewImageColumn imgCol = new DataGridViewImageColumn
             {
                 Name = "BuktiGambar",
@@ -110,43 +97,13 @@ namespace TaniGrow2.View
                 Width = 120
             };
 
-            // letakkan SETELAH BuktiPembayaranData
             int insertIndex = dataGridView1.Columns["BuktiPembayaranData"].Index + 1;
             dataGridView1.Columns.Insert(insertIndex, imgCol);
 
-            // ISI GAMBAR
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                if (row.IsNewRow) continue;
-
-                var raw = row.Cells["BuktiPembayaranData"].Value;
-
-                if (raw is byte[] imgBytes && imgBytes.Length > 0)
-                {
-                    try
-                    {
-                        using (var ms = new MemoryStream(imgBytes))
-                        {
-                            row.Cells["BuktiGambar"].Value = Image.FromStream(ms);
-                        }
-                    }
-                    catch
-                    {
-                        row.Cells["BuktiGambar"].Value = null;
-                    }
-                }
-                else
-                {
-                    row.Cells["BuktiGambar"].Value = null;
-                }
-            }
-
-
-            // ----------------------- STYLE DATAGRID ------------------------
+            // Sembunyikan kolom raw byte
             if (dataGridView1.Columns.Contains("ID"))
                 dataGridView1.Columns["ID"].Visible = false;
 
-            // sembunyikan kolom raw byte agar tidak terlihat
             if (dataGridView1.Columns.Contains("BuktiPembayaranData"))
                 dataGridView1.Columns["BuktiPembayaranData"].Visible = false;
 
@@ -166,8 +123,6 @@ namespace TaniGrow2.View
             dataGridView1.DefaultCellStyle.SelectionBackColor = dataGridView1.DefaultCellStyle.BackColor;
             dataGridView1.DefaultCellStyle.SelectionForeColor = dataGridView1.DefaultCellStyle.ForeColor;
 
-            // ------------------------ KOLOM COMBO STATUS ------------------------
-            // jangan hapus kolom sumber (Status), kita buat ComboBox yang terhubung ke nilai ini
             if (dataGridView1.Columns.Contains("StatusEdit"))
                 dataGridView1.Columns.Remove("StatusEdit");
 
@@ -175,36 +130,31 @@ namespace TaniGrow2.View
             {
                 Name = "StatusEdit",
                 HeaderText = "Status",
-                DataPropertyName = "Status", // sumber dari DataTable kolom "Status"
+                DataPropertyName = "Status",
                 ValueType = typeof(string)
             };
             comboStatus.Items.AddRange(AllowedStatuses);
             dataGridView1.Columns.Add(comboStatus);
 
-            // Setelah menambahkan kolom combo, set value setiap baris ke nilai Status yang ada
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
                 if (row.IsNewRow) continue;
-                if (dataGridView1.Columns.Contains("Status") && dataGridView1.Columns.Contains("StatusEdit"))
-                {
-                    var val = row.Cells["Status"].Value;
-                    if (val != null)
-                    {
-                        // jika value cocok dengan allowed, langsung set; kalau tidak, normalisasi
-                        string s = val.ToString();
-                        if (!AllowedStatuses.Contains(s))
-                            s = NormalizeStatus(s);
+                var val = row.Cells["Status"].Value;
 
-                        row.Cells["StatusEdit"].Value = s;
-                    }
-                    else
-                    {
-                        row.Cells["StatusEdit"].Value = "Diproses";
-                    }
+                if (val != null)
+                {
+                    string s = val.ToString();
+                    if (!AllowedStatuses.Contains(s))
+                        s = NormalizeStatus(s);
+
+                    row.Cells["StatusEdit"].Value = s;
+                }
+                else
+                {
+                    row.Cells["StatusEdit"].Value = "Diproses";
                 }
             }
 
-            // ------------------------ KOLOM BUTTON SIMPAN ------------------------
             if (dataGridView1.Columns.Contains("Simpan"))
                 dataGridView1.Columns.Remove("Simpan");
 
@@ -218,7 +168,6 @@ namespace TaniGrow2.View
             };
             dataGridView1.Columns.Add(btnSave);
 
-            // tempatkan combo & tombol di paling kanan
             comboStatus.DisplayIndex = dataGridView1.Columns.Count - 2;
             btnSave.DisplayIndex = dataGridView1.Columns.Count - 1;
 
@@ -226,9 +175,41 @@ namespace TaniGrow2.View
             dataGridView1.CellClick += DataGridView1_CellClick;
         }
 
-        // --------------------------- AFTER BINDING ---------------------------
+        // ============================================
+        //     AUTO LOAD GAMBAR SETELAH DATA BIND
+        // ============================================
         private void DataGridView1_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
         {
+            if (dataGridView1.Columns.Contains("BuktiGambar") &&
+                dataGridView1.Columns.Contains("BuktiPembayaranData"))
+            {
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    if (row.IsNewRow) continue;
+
+                    var raw = row.Cells["BuktiPembayaranData"].Value;
+
+                    if (raw is byte[] imgBytes && imgBytes.Length > 0)
+                    {
+                        try
+                        {
+                            using (var ms = new MemoryStream(imgBytes))
+                            {
+                                row.Cells["BuktiGambar"].Value = Image.FromStream(ms);
+                            }
+                        }
+                        catch
+                        {
+                            row.Cells["BuktiGambar"].Value = null;
+                        }
+                    }
+                    else
+                    {
+                        row.Cells["BuktiGambar"].Value = null;
+                    }
+                }
+            }
+
             if (dataGridView1.Columns.Contains("StatusEdit") &&
                 dataGridView1.Columns.Contains("Simpan"))
             {
@@ -237,7 +218,6 @@ namespace TaniGrow2.View
             }
         }
 
-        // --------------------------- EVENT CLICK SAVE ---------------------------
         private void DataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && dataGridView1.Columns[e.ColumnIndex].Name == "Simpan")
@@ -276,7 +256,6 @@ namespace TaniGrow2.View
             }
         }
 
-        // --------------------------- NORMALISASI STATUS ---------------------------
         private string NormalizeStatus(string status)
         {
             if (string.IsNullOrWhiteSpace(status))
@@ -305,7 +284,6 @@ namespace TaniGrow2.View
             };
         }
 
-        // --------------------------- NAVIGASI FORM ---------------------------
         private void btnkatalaogadmin_Click(object sender, EventArgs e)
         {
             new v_katalogcustomer().Show();

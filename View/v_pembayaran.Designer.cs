@@ -34,6 +34,7 @@
             tbalamat = new RichTextBox();
             btnbayar = new Button();
             pictureBox1 = new PictureBox();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBoxBukti).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -41,6 +42,7 @@
             // labeltotal
             // 
             labeltotal.AutoSize = true;
+            labeltotal.BackColor = Color.Transparent;
             labeltotal.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             labeltotal.Location = new Point(770, 496);
             labeltotal.Name = "labeltotal";
@@ -51,9 +53,9 @@
             // pictureBoxBukti
             // 
             pictureBoxBukti.BackColor = Color.SeaGreen;
-            pictureBoxBukti.Location = new Point(1063, 553);
+            pictureBoxBukti.Location = new Point(1063, 564);
             pictureBoxBukti.Name = "pictureBoxBukti";
-            pictureBoxBukti.Size = new Size(469, 321);
+            pictureBoxBukti.Size = new Size(469, 310);
             pictureBoxBukti.TabIndex = 1;
             pictureBoxBukti.TabStop = false;
             pictureBoxBukti.Click += pictureBoxBukti_Click;
@@ -88,6 +90,17 @@
             pictureBox1.TabIndex = 4;
             pictureBox1.TabStop = false;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.Transparent;
+            label1.Font = new Font("Segoe UI", 16F);
+            label1.Location = new Point(1129, 513);
+            label1.Name = "label1";
+            label1.Size = new Size(340, 37);
+            label1.TabIndex = 5;
+            label1.Text = "Inputkan Bukti Pembayaran";
+            // 
             // v_pembayaran
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -95,6 +108,7 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(1924, 1055);
+            Controls.Add(label1);
             Controls.Add(pictureBox1);
             Controls.Add(btnbayar);
             Controls.Add(tbalamat);
@@ -116,5 +130,6 @@
         private RichTextBox tbalamat;
         private Button btnbayar;
         private PictureBox pictureBox1;
+        private Label label1;
     }
 }
